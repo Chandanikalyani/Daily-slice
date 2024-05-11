@@ -408,7 +408,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {location.pathname !== '/user/dashboard' && <Header
+      {location.pathname !== '/user/dashboard' && location.pathname !== '/admin/dashboard'&& <Header
         loginModal={
           <LoginModal
             validLogin={validLogin}
