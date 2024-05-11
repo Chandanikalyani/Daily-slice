@@ -1,22 +1,22 @@
 import React from 'react';
+import Dashboard from './AdminDash/Components/Dashboard';
+import Navbar from './AdminDash/Components/Navbar';
+import Sidebar from './AdminDash/Components/Sidebar';
+import Footer from  './AdminDash/Components/Footer'
 
-
-
-const AdminDashboard = () => {
+function AdminDashboard() {
   return (
     <div>
-  
-      {/* Your main content for the admin dashboard goes here */}
-      <div>
-        {/* Content of AdminDashboard */}
-        <h1>Welcome to Admin Dashboard</h1>
-        {/* Add other content specific to the admin dashboard */}
-      </div>
-   
+      {/* <Navbar/> */}
+                <div class="container-fluid" id="main">
+                 <div class="row row-offcanvas row-offcanvas-left">
+                   <Sidebar/>
+                  <Dashboard/>
+           
+               
+             </div>
+            </div>  
     </div>
-  );
+  )
 }
-
-export default AdminDashboard;
-
-
+export default AdminDashboard
