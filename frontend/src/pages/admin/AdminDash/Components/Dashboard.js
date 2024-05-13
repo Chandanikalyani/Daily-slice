@@ -2,17 +2,16 @@ import {useEffect,useState} from 'react';
 import PieChart from './PieChart';
 const Dashboard = () => {
   
-   const[record,setRecord] = useState([])
-   const getData = () =>
-   {
-       fetch('https://jsonplaceholder.typicode.com/users')
-       .then(resposne=> resposne.json())
-       .then(res=>setRecord(res))
-   }
-   useEffect(() => {
-      getData();
-   },)
-   
+    fetch('/users')
+    .then(response => response.json())
+    .then(data => {
+        const count = data.count;
+        // Get the <h1> element by its ID or any other selector
+        const h1Element = document.getElementById('countHeader');
+        // Set the count value as the inner HTML content of the <h1> element
+        h1Element.innerHTML = '${count}';
+    })
+    .catch(error => console.error('Error:', error));
     return (
     <div class="col main ">
         <div class="row mb-3">
@@ -23,7 +22,7 @@ const Dashboard = () => {
                             <i class="fa fa-user fa-4x"></i>
                         </div>
                         <h6 class="text-uppercase">Users</h6>
-                        <h1 class="display-4">134</h1>
+                        <h1 id= 'countHeader' class="display-4"></h1>
                     </div>
                 </div>
             </div>
