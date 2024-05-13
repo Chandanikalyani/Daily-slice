@@ -10,8 +10,8 @@ router.post('/register', UserController.registerUser);
 router.post('/signin',UserController.signInUser);
 
 
-// Get all users
-router.get('/users', UserController.getAllUsers);
+// Fetch all users
+router.get('/all', UserController.getAllUsers);
 
 
 module.exports = router;
