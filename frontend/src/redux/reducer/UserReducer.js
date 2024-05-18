@@ -7,9 +7,9 @@ import {
     USER_SIGNIN_SUCCESS,
     USER_SIGNIN_FAIL,
 
-    USER_LOAD_REQUEST,
-    USER_LOAD_SUCCESS,
-    USER_LOAD_FAIL
+    FEEDBACK_CREATE_REQUEST,
+    FEEDBACK_CREATE_SUCCESS,
+    FEEDBACK_CREATE_FAIL
 
   } from "../constants/UserConstants";
   
@@ -56,26 +56,40 @@ export const userReducerSignIn = (state = {}, action) => {
     default:
       return state;
   }
-  
 };
 
-// Reducer function for loading all users
-export const userReducerLoad = (state = { users: [] }, action) => {
+  // Initial state for feedback
+const initialState = {
+  loading: false,
+  success: false,
+  error: null,
+};
+
+// Reducer function for creating feedback
+export const feedbackReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOAD_REQUEST:
-      return { loading: true, users: [] };
-    case USER_LOAD_SUCCESS:
+    case FEEDBACK_CREATE_REQUEST:
       return {
-        loading: false,
-        users: action.payload
+        ...state,
+        loading: true,
+        success: false,
+        error: null,
       };
-    case USER_LOAD_FAIL:
-      return { loading: false, error: action.payload };
+    case FEEDBACK_CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: null,
+      };
+    case FEEDBACK_CREATE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
 };
-
-
-  
-  

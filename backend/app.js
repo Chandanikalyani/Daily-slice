@@ -6,6 +6,8 @@ const userModel = require('./Models/UserModel');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const User = require('./Models/UserModel');
+const Feedback = require('./Models/FeedbackModel');
+
 
 
 const app = express();
@@ -62,14 +64,15 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+
 // Route to handle POST request for submitting feedback
-app.post('/api/submit-feedback', async (req, res) => {
+app.post('/api/feedback', async (req, res) => {
   try {
-    const { fullname, email, message } = req.body;
+    const { name, email, message } = req.body;
 
     // Create a new feedback instance
     const newFeedback = new Feedback({
-      fullname,
+      name,
       email,
       message
     });
@@ -85,6 +88,7 @@ app.post('/api/submit-feedback', async (req, res) => {
     res.status(500).json({ success: false, message: 'Error submitting feedback. Please try again later.' });
   }
 });
+
 
 
 //routes

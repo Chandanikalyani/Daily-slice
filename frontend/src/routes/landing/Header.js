@@ -1,29 +1,31 @@
-import React from 'react'
-
+import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import openMenu from '../../assets/images/open-menu.svg'
-import closeMenu from '../../assets/images/close-menu.svg'
-import { Link, NavLink } from 'react-router-dom'
-import SuccessMsg from '../../components/SuccessMsg'
-import ResetLocation from '../../helpers/ResetLocation'
+import openMenu from "../../assets/images/open-menu.svg";
+import closeMenu from "../../assets/images/close-menu.svg";
+import { Link, NavLink } from "react-router-dom";
+import SuccessMsg from "../../components/SuccessMsg";
+import ResetLocation from "../../helpers/ResetLocation";
 
-const Header = ({ loginModal,
+const Header = ({
+  loginModal,
   productsQuantity,
   handleLogout,
   showModal,
   isModalActive,
   hideMenu,
-  validLogin, activateLoginModal }) => {
+  validLogin,
+  activateLoginModal,
+}) => {
   return (
     <header>
       {loginModal}
       <nav className="main-nav flex-container flex-row txt-center">
         <NavLink
           onClick={() => {
-            ResetLocation()
-            hideMenu()
+            ResetLocation();
+            hideMenu();
           }}
           to="/"
           className="logo-styling flex-container flex-row txt-center txt-white"
@@ -32,27 +34,30 @@ const Header = ({ loginModal,
             className="rounded-circle"
             width="100px"
             height="100px"
-            
             src="images/logo.png"
             alt="Pizza Time logo"
           />
           <h1>
-           Italian<span> Pizza </span>
+            Italian<span> Pizza </span>
           </h1>
         </NavLink>
-        <ul className={`navigation-menu flex-row pop-font ${isModalActive ? 'active' : ''}`}>
+        <ul
+          className={`navigation-menu flex-row pop-font ${
+            isModalActive ? "active" : ""
+          }`}
+        >
           <li>
             <NavLink
               onClick={() => {
-                ResetLocation()
-                hideMenu()
+                ResetLocation();
+                hideMenu();
               }}
               style={({ isActive }) =>
                 isActive
                   ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
+                      textDecoration: "none",
+                      color: "#ff6240",
+                    }
                   : {}
               }
               className="txt-white"
@@ -64,15 +69,15 @@ const Header = ({ loginModal,
           <li>
             <NavLink
               onClick={() => {
-                ResetLocation()
-                hideMenu()
+                ResetLocation();
+                hideMenu();
               }}
               style={({ isActive }) =>
                 isActive
                   ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
+                      textDecoration: "none",
+                      color: "#ff6240",
+                    }
                   : {}
               }
               className="txt-white"
@@ -85,15 +90,15 @@ const Header = ({ loginModal,
           <li>
             <NavLink
               onClick={() => {
-                ResetLocation()
-                hideMenu()
+                ResetLocation();
+                hideMenu();
               }}
               style={({ isActive }) =>
                 isActive
                   ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
+                      textDecoration: "none",
+                      color: "#ff6240",
+                    }
                   : {}
               }
               className="txt-white"
@@ -105,15 +110,15 @@ const Header = ({ loginModal,
           <li>
             <NavLink
               onClick={() => {
-                ResetLocation()
-                hideMenu()
+                ResetLocation();
+                hideMenu();
               }}
               style={({ isActive }) =>
                 isActive
                   ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
+                      textDecoration: "none",
+                      color: "#ff6240",
+                    }
                   : {}
               }
               className="txt-white"
@@ -125,43 +130,45 @@ const Header = ({ loginModal,
           <li>
             <NavLink
               onClick={() => {
-                ResetLocation()
-                hideMenu()
+                ResetLocation();
+                hideMenu();
               }}
               style={({ isActive }) =>
                 isActive
                   ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
+                      textDecoration: "none",
+                      color: "#ff6240",
+                    }
                   : {}
               }
               className="txt-white"
               to="/contact"
             >
-              Contact
+              Feedback
             </NavLink>
           </li>
-          {validLogin ? <li>
-            <NavLink
-              onClick={() => {
-                ResetLocation()
-                hideMenu()
-              }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                    textDecoration: 'none',
-                    color: '#ff6240',
-                  }
-                  : {}
-              }
-              className="txt-white"
-              to="/profile"
-            >
-              Profile
-            </NavLink>
-          </li> : null}
+          {validLogin ? (
+            <li>
+              <NavLink
+                onClick={() => {
+                  ResetLocation();
+                  hideMenu();
+                }}
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        textDecoration: "none",
+                        color: "#ff6240",
+                      }
+                    : {}
+                }
+                className="txt-white"
+                to="/profile"
+              >
+                Profile
+              </NavLink>
+            </li>
+          ) : null}
           <li>
             <div className="login-and-cart">
               {validLogin ? (
@@ -169,8 +176,8 @@ const Header = ({ loginModal,
                   to="/"
                   className="passive-button-style txt-white"
                   onClick={() => {
-                    ResetLocation()
-                    handleLogout()
+                    ResetLocation();
+                    handleLogout();
                   }}
                 >
                   Log out
@@ -179,9 +186,8 @@ const Header = ({ loginModal,
                 <div
                   className="passive-button-style txt-white"
                   onClick={() => {
-                    ResetLocation()
-                    activateLoginModal()
-                    
+                    ResetLocation();
+                    activateLoginModal();
                   }}
                 >
                   Log in
@@ -191,14 +197,11 @@ const Header = ({ loginModal,
                 className="cart-btn active-button-style txt-white"
                 to="/cart"
                 onClick={() => {
-                  ResetLocation()
-                  hideMenu()
+                  ResetLocation();
+                  hideMenu();
                 }}
               >
-               
                 <p>Reservation</p>
-                
-
               </NavLink>
             </div>
           </li>
@@ -214,9 +217,8 @@ const Header = ({ loginModal,
       </nav>
       <SuccessMsg />
     </header>
-  )
-}
+  );
+};
 // }
-
 
 export default Header;

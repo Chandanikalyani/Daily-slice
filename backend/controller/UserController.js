@@ -1,4 +1,5 @@
 const User = require('../Models/UserModel');
+const Feedback = require('../Models/FeedbackModel');
 
 
 // create a new user
@@ -65,3 +66,28 @@ exports.getAllUsers = async (req, res, next) => {
     }
 };
     
+// Create a new feedback
+exports.createFeedback = async (req, res, next) => {
+    try {
+        const feedback = await Feedback.create(req.body);
+        res.status(201).json({
+            success: true,
+            feedback
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Fetch all feedback
+exports.getAllFeedback = async (req, res, next) => {
+    try {
+        const feedback = await Feedback.find();
+        res.status(200).json({
+            success: true,
+            feedback
+        });
+    } catch (error) {
+        next(error);
+    }
+};

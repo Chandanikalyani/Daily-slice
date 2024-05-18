@@ -13,5 +13,8 @@ router.post('/signin',UserController.signInUser);
 // Fetch all users
 router.get('/all', UserController.getAllUsers);
 
+//Create a new feedback
+router.post('/feedback',UserController.createFeedback);
+
 
 module.exports = router;

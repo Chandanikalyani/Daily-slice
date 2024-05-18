@@ -8,12 +8,12 @@ import {
   USER_SIGNIN_FAIL ,
   USER_SIGNIN_SUCCESS,
   USER_SIGNIN_REQUEST,
-  
-  USER_LOAD_REQUEST,
-  USER_LOAD_SUCCESS,
-  USER_LOAD_FAIL
 
-} from "../../../constants/UserConstants";
+  FEEDBACK_CREATE_REQUEST,
+  FEEDBACK_CREATE_SUCCESS,
+  FEEDBACK_CREATE_FAIL
+  
+} from "../constants/UserConstants";
 
 
 // Action to register a new user
@@ -56,21 +56,21 @@ export const signInUser = (email, password) => async (dispatch) => {
   }
 }
 
-// Action to load all users
-export const loadAllUsers = () => async (dispatch) => {
-  dispatch({ type: USER_LOAD_REQUEST });
+// Action to create feedback
+export const createFeedback = (feedbackData) => async (dispatch) => {
+  dispatch({ type: FEEDBACK_CREATE_REQUEST });
   try {
-    const { data } = await axios.get("/user/all"); // Assuming this is the correct endpoint
+    const { data } = await axios.post("/api/feedback", feedbackData); // Assuming this is the correct endpoint for creating feedback
     dispatch({
-      type: USER_LOAD_SUCCESS,
-      payload: data.users // Assuming the response structure has a 'users' property containing the array of users
+      type: FEEDBACK_CREATE_SUCCESS,
+      payload: data
     });
-    toast.success("Users loaded successfully!");
+    toast.success("Feedback submitted successfully!");
   } catch (error) {
     dispatch({
-      type: USER_LOAD_FAIL,
+      type: FEEDBACK_CREATE_FAIL,
       payload: error.response.data.error
     });
-    toast.error("Failed to load users!");
+    toast.error("Failed to submit feedback!");
   }
 }

@@ -1,18 +1,25 @@
 import {useEffect,useState} from 'react';
-import PieChart from './PieChart';
+import axios from 'axios';
+
 const Dashboard = () => {
   
-    fetch('/users')
-    .then(response => response.json())
-    .then(data => {
-        const count = data.count;
-        // Get the <h1> element by its ID or any other selector
-        const h1Element = document.getElementById('countHeader');
-        // Set the count value as the inner HTML content of the <h1> element
-        h1Element.innerHTML = '${count}';
-    })
-    .catch(error => console.error('Error:', error));
+    const [userCount, setUserCount] = useState(0);
+
+    useEffect(() => {
+        const fetchUserCount = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/users');
+                setUserCount(response.data.length); // Assuming the response data is an array of users
+            } catch (error) {
+                console.error('Error fetching user count:', error);
+            }
+        };
+
+        fetchUserCount();
+    }, []);
+   
     return (
+        
     <div class="col main ">
         <div class="row mb-3">
             <div class="col-xl-3 col-sm-6 py-2">
@@ -22,7 +29,7 @@ const Dashboard = () => {
                             <i class="fa fa-user fa-4x"></i>
                         </div>
                         <h6 class="text-uppercase">Users</h6>
-                        <h1 id= 'countHeader' class="display-4"></h1>
+                        <h1 class="display-4">{userCount}</h1>
                     </div>
                 </div>
             </div>
@@ -62,6 +69,7 @@ const Dashboard = () => {
         </div>
         <hr/>
     </div>
+ 
     )
 }
 export default Dashboard
