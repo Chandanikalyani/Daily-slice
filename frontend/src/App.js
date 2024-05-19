@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter,useLocation  } from 'react-router-dom';
 import Header from './routes/landing/Header.js';
 import Footer from './components/footer/Footer';
+
 import {
   About,
   Blog,
@@ -30,6 +31,7 @@ import Profile from './routes/profile/Profile.js';
 import ResetLocation from './helpers/ResetLocation.js';
 import AdminDashboard from "./pages/admin/AdminDashboard.js";
 import UserDashboard from "./pages/user/UserDashboard.js";
+import AdminUsers from "./pages/admin/AdminUsers.js";
 
 
 function App() {
@@ -524,6 +526,8 @@ function App() {
         <Route path="/refunds" element={<Refunds />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/admin/adminusers" element={<AdminUsers />} />
+        
       </Routes>
 
       {/* <Footer /> */}
