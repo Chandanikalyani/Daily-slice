@@ -32,7 +32,10 @@ import ResetLocation from './helpers/ResetLocation.js';
 import AdminDashboard from "./pages/admin/AdminDashboard.js";
 import UserDashboard from "./pages/user/UserDashboard.js";
 import AdminUsers from "./pages/admin/AdminUsers.js";
-
+import AdminAddPlacePopup from "./pages/admin/AdminAddPlacePopup.js";
+import AdminAddPackagePopup from "./pages/admin/AdminAddPackagePopup.js";
+import AdminAddOfferPopup from "./pages/admin/AdminAddOfferPopup.js";
+import AdminAddItemPopup from "./pages/admin/AdminAddItemPopup.js";
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -527,7 +530,11 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/admin/adminusers" element={<AdminUsers />} />
-        
+        <Route path="/admin/adminaddplace" element={<AdminAddPlacePopup/>}/>
+        <Route path="/admin/adminaddpackage" element={<AdminAddPackagePopup/>}/>
+        <Route path="/admin/adminaddoffer" element={<AdminAddOfferPopup/>}/>
+        <Route path="/admin/adminadditem" element={<AdminAddItemPopup/>}/>
+
       </Routes>
 
       {/* <Footer /> */}
