@@ -18,7 +18,7 @@ const Sidebar = () => {
                        <li class="nav-item mb-2 "><a class="nav-link text-secondary" href=""> <i class="fas fa-book-medical"></i> File Report </a></li>
                     </ul>
                 </li>
-                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="far font-weight-bold"></i> <span className="ml-3"><FaUsers />&nbsp; &nbsp;Users</span></a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminusers"><i class="far font-weight-bold"></i> <span className="ml-3"><FaUsers />&nbsp; &nbsp;Users</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="far font-weight-bold"></i> <span className="ml-3"><FaCalendarAlt />&nbsp; &nbsp;Reservation</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i><span className="ml-3"><GiFireplace /> &nbsp; &nbsp;Places</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i><span className="ml-3"> <GrAnnounce />&nbsp; &nbsp;Announcements</span></a></li>
