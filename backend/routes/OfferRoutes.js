@@ -1,8 +1,6 @@
-// offerRoutes.js
-
 const express = require('express');
 const router = express.Router();
-const offerController = require('./offercontroller');
+const offerController = require('../controller/OfferConroller');
 
 // Route to create a new offer
 router.post('/offers', offerController.createOffer);
