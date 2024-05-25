@@ -1,69 +1,29 @@
-// ItemAction.js
+// ItemActions.js
 
-const axios = require('axios');
+import axios from 'axios';
+import {
+  ITEM_CREATE_REQUEST,
+  ITEM_CREATE_SUCCESS,
+  ITEM_CREATE_FAIL
 
-// Set the base URL for your API
-const API_BASE_URL = 'http://localhost:4000';
 
-// Create a new item
-const createItem = async (itemData) => {
+} from '../constants/ItemConstants';
+
+// Action creators
+export const createItem = (itemData) => async (dispatch) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/items`, itemData);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating item:', error);
-    throw error;
-  }
-};
+    dispatch({ type: ITEM_CREATE_REQUEST });
 
-// Get all items
-const getAllItems = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/items`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching items:', error);
-    throw error;
-  }
-};
+    const { data } = await axios.post('/api/items', itemData);
 
-// Get a single item by ID
-const getItemById = async (id) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/items/${id}`);
-    return response.data;
+    dispatch({
+      type: ITEM_CREATE_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-    console.error(`Error fetching item with ID ${id}:`, error);
-    throw error;
+    dispatch({
+      type: ITEM_CREATE_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
   }
-};
-
-// Update an item by ID
-const updateItem = async (id, itemData) => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/items/${id}`, itemData);
-    return response.data;
-  } catch (error) {
-    console.error(`Error updating item with ID ${id}:`, error);
-    throw error;
-  }
-};
-
-// Delete an item by ID
-const deleteItem = async (id) => {
-  try {
-    const response = await axios.delete(`${API_BASE_URL}/items/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error deleting item with ID ${id}:`, error);
-    throw error;
-  }
-};
-
-module.exports = {
-  createItem,
-  getAllItems,
-  getItemById,
-  updateItem,
-  deleteItem,
 };

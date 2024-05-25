@@ -1,69 +1,43 @@
-// packageAction.js
+import axios from 'axios';
+import {
+  CREATE_PACKAGE_REQUEST,
+  CREATE_PACKAGE_SUCCESS,
+  CREATE_PACKAGE_FAILURE
+} from '../constants/PackageConstants';
 
-const axios = require('axios');
-
-// Set the base URL for your API
-const API_BASE_URL = 'http://localhost:4000';
-
-// Create a new package
-const createPackage = async (packageData) => {
+// Action creators
+export const createPackage = (packageData) => async (dispatch) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/packages`, packageData);
-    return response.data;
+    dispatch({ type: CREATE_PACKAGE_REQUEST });
+
+    const { data } = await axios.post('/api/packages', packageData);
+
+    dispatch({
+      type: CREATE_PACKAGE_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-    console.error('Error creating package:', error);
-    throw error;
+    dispatch({
+      type: CREATE_PACKAGE_FAILURE,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
   }
 };
 
-// Get all packages
-const getAllPackages = async () => {
+export const getAllPackages = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/packages`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching packages:', error);
-    throw error;
-  }
-};
+    dispatch({ type: GET_ALL_PACKAGES_REQUEST });
 
-// Get a single package by ID
-const getPackageById = async (id) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/packages/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching package with ID ${id}:`, error);
-    throw error;
-  }
-};
+    const { data } = await axios.get('/api/packages');
 
-// Update a package by ID
-const updatePackage = async (id, packageData) => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/packages/${id}`, packageData);
-    return response.data;
+    dispatch({
+      type: GET_ALL_PACKAGES_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-    console.error(`Error updating package with ID ${id}:`, error);
-    throw error;
+    dispatch({
+      type: GET_ALL_PACKAGES_FAILURE,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
   }
-};
-
-// Delete a package by ID
-const deletePackage = async (id) => {
-  try {
-    const response = await axios.delete(`${API_BASE_URL}/packages/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error deleting package with ID ${id}:`, error);
-    throw error;
-  }
-};
-
-module.exports = {
-  createPackage,
-  getAllPackages,
-  getPackageById,
-  updatePackage,
-  deletePackage,
 };
