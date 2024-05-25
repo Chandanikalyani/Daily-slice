@@ -1,5 +1,3 @@
-// packagemodel.js
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -14,7 +12,7 @@ const packageSchema = new Schema({
     required: true,
   },
   off: {
-    type: String, // Percentage discount
+    type: String,
     required: true,
   },
   price: {
@@ -26,8 +24,7 @@ const packageSchema = new Schema({
     required: true,
   },
   duration: {
-    type: String, // Duration in days, weeks, months, etc.
-    
+    type: String,
   },
 }, { collection: 'packages' });
 

@@ -1,5 +1,3 @@
-// offermodel.js
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -14,7 +12,7 @@ const offerSchema = new Schema({
     required: true,
   },
   duration: {
-    type: String, // Duration in days, weeks, months, etc.
+    type: String,
     required: true,
   },
 }, { collection: 'offers' });
