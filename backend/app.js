@@ -7,8 +7,9 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const User = require('./Models/UserModel');
 const Feedback = require('./Models/FeedbackModel');
-
-
+const itemRoutes = require('./routes/ItemRoutes');
+const offerRoutes = require('./routes/OfferRoutes');
+const packageRoutes = require('./routes/PackageRoutes'); // Import package routes
 
 const app = express();
 
@@ -27,8 +28,7 @@ mongoose.connect(DATABASE_URI, {
 // Middleware
 app.use(cookieParser());
 app.use(cors());
-app.use (express.json());
-
+app.use(express.json());
 
 app.post("/api/register",async(req,res)=>{
   let user = new userModel(req.body);
@@ -40,12 +40,10 @@ app.post("/api/register",async(req,res)=>{
 app.get('/user/:email', async (req, res) => {
   try {
     const email = req.params.email;
-    // Query the database to get user details by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    // Return user details as response
     res.json(user);
   } catch (error) {
     console.error(error);
@@ -64,41 +62,28 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-
-// Route to handle POST request for submitting feedback
 app.post('/api/feedback', async (req, res) => {
   try {
     const { name, email, message } = req.body;
-
-    // Create a new feedback instance
-    const newFeedback = new Feedback({
-      name,
-      email,
-      message
-    });
-
-    // Save the feedback to the database
+    const newFeedback = new Feedback({ name, email, message });
     await newFeedback.save();
-
-    // Respond with success message
     res.status(200).json({ success: true, message: 'Feedback submitted successfully!' });
   } catch (error) {
-    // Handle errors
     console.error('Error submitting feedback:', error);
     res.status(500).json({ success: false, message: 'Error submitting feedback. Please try again later.' });
   }
 });
 
-
-
 //routes
-app.use('/user',authRoutes);
-app.use('/user',userRoutes);
+app.use('/user', authRoutes);
+app.use('/user', userRoutes);
 app.use('/api', userRoutes);
+app.use('/api', itemRoutes);
+app.use('/api', offerRoutes);
+app.use('/api', packageRoutes); // Use package routes
 
 // Port
 const port = 4000;
-
 app.listen(port, () => {
   console.log('server running on port 4000');
 });
