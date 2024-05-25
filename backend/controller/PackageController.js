@@ -1,11 +1,7 @@
-// packagecontroller.js
-
-const express = require('express');
-const router = express.Router();
-const Package = require('./packagemodel');
+const Package = require('../Models/PackageModel');
 
 // Create a new package
-router.post('/packages', async (req, res) => {
+const createPackage = async (req, res) => {
   try {
     const newPackage = new Package(req.body);
     const savedPackage = await newPackage.save();
@@ -13,20 +9,20 @@ router.post('/packages', async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-});
+};
 
 // Get all packages
-router.get('/packages', async (req, res) => {
+const getAllPackages = async (req, res) => {
   try {
     const packages = await Package.find();
     res.status(200).json(packages);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
 // Get a single package by ID
-router.get('/packages/:id', async (req, res) => {
+const getPackageById = async (req, res) => {
   try {
     const package = await Package.findById(req.params.id);
     if (!package) {
@@ -36,10 +32,10 @@ router.get('/packages/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
 // Update a package by ID
-router.put('/packages/:id', async (req, res) => {
+const updatePackage = async (req, res) => {
   try {
     const updatedPackage = await Package.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!updatedPackage) {
@@ -49,10 +45,10 @@ router.put('/packages/:id', async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-});
+};
 
 // Delete a package by ID
-router.delete('/packages/:id', async (req, res) => {
+const deletePackage = async (req, res) => {
   try {
     const deletedPackage = await Package.findByIdAndDelete(req.params.id);
     if (!deletedPackage) {
@@ -62,6 +58,12 @@ router.delete('/packages/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  createPackage,
+  getAllPackages,
+  getPackageById,
+  updatePackage,
+  deletePackage,
+};
