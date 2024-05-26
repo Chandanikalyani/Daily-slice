@@ -9,32 +9,35 @@ const User = require('./Models/UserModel');
 const Feedback = require('./Models/FeedbackModel');
 const itemRoutes = require('./routes/ItemRoutes');
 const offerRoutes = require('./routes/OfferRoutes');
-const packageRoutes = require('./routes/PackageRoutes'); // Import package routes
+const packageRoutes = require('./routes/PackageRoutes');
+// const placeRoutes = require('./routes/PlaceRoutes'); // Import place routes
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 
 // Database connection
-const DATABASE_URI = "mongodb://0.0.0.0:27017/pizza";
+const DATABASE_URI = "mongodb://localhost:27017/pizza";
 mongoose.connect(DATABASE_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
-
 })
 .then(() => console.log("DB connected"))
 .catch((err) => console.error("DB connection error:", err));
 
 // Middleware
-app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
+// Register route for users
 app.post("/api/register",async(req,res)=>{
   let user = new userModel(req.body);
   let result = await user.save();
   res.send(result);
-})
+});
 
 // Backend endpoint to get user details by email
 app.get('/user/:email', async (req, res) => {
@@ -62,6 +65,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+// Backend endpoint to submit feedback
 app.post('/api/feedback', async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -74,16 +78,42 @@ app.post('/api/feedback', async (req, res) => {
   }
 });
 
-//routes
+// Multer configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/itemPictures');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
+
+// Route to handle file upload
+app.post('/api/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+  const imagePath = req.file.path.replace('public', '');
+  res.json({ imagePath: imagePath });
+});
+
+// Routes
 app.use('/user', authRoutes);
 app.use('/user', userRoutes);
-app.use('/api', userRoutes);
 app.use('/api', itemRoutes);
 app.use('/api', offerRoutes);
-app.use('/api', packageRoutes); // Use package routes
+app.use('/api', packageRoutes);
+// app.use('/api', placeRoutes); // Use place routes
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Port
 const port = 4000;
 app.listen(port, () => {
-  console.log('server running on port 4000');
+  console.log('Server running on port 4000');
 });

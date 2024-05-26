@@ -6,22 +6,23 @@ import {
   DialogTitle,
   IconButton,
   TextField,
+  MenuItem,
   FormControl,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
+  Select,
+  InputLabel,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const AdminAddPackagePopup = () => {
   const [open, setOpen] = useState(false);
   const [packageName, setPackageName] = useState("");
-  const [packageItems, setPackageItems] = useState("");
-  const [discount, setDiscount] = useState("");
+  const [packageItem, setPackageItem] = useState("");
+  const [off, setOff] = useState("");
   const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+  const [describe, setDescription] = useState("");
   const [duration, setDuration] = useState("");
-  const [error, setError] = useState("");
+
+  const items = ["Item 1", "Item 2", "Item 3"]; // Example items, replace with your own items
 
   const openPopup = () => {
     setOpen(true);
@@ -31,21 +32,43 @@ const AdminAddPackagePopup = () => {
     setOpen(false);
   };
 
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/packages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ packageName, packageItem, off, price, describe, duration }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send data");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data));
+      alert("Package creation successful");
+      closePopup();
+    } catch (error) {
+      alert("Package creation failed");
+    }
+  };
+
   return (
     <div style={{ textAlign: "center" }}>
       <Button onClick={openPopup} color="success" variant="contained">
         + Add Package
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue" }}>
+        <DialogTitle style={{ background: "blue", color: "white" }}>
           <h3>Add New Package</h3>
           <IconButton onClick={closePopup} style={{ float: "right" }}>
-            <CloseIcon color="primary" />
+            <CloseIcon style={{ color: "white" }} />
           </IconButton>
         </DialogTitle>
         <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px" }}>
           <div className="container">
-            <br />
             <form>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
@@ -57,24 +80,22 @@ const AdminAddPackagePopup = () => {
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
-                  label="Package Items"
+                  label="Package Item"
                   fullWidth
-                  value={packageItems}
-                  onChange={(e) => setPackageItems(e.target.value)}
+                  value={packageItem}
+                  onChange={(e) => setPackageItem(e.target.value)}
                 />
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
-                  type="number"
-                  label="Discount (Off)"
+                  label="Off (%)"
                   fullWidth
-                  value={discount}
-                  onChange={(e) => setDiscount(e.target.value)}
+                  value={off}
+                  onChange={(e) => setOff(e.target.value)}
                 />
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
-                  type="number"
                   label="Price"
                   fullWidth
                   value={price}
@@ -86,7 +107,7 @@ const AdminAddPackagePopup = () => {
                   label="Description"
                   fullWidth
                   multiline
-                  value={description}
+                  value={describe}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
@@ -102,18 +123,15 @@ const AdminAddPackagePopup = () => {
                   onChange={(e) => setDuration(e.target.value)}
                 />
               </div>
-
               <Button
                 style={{ background: "yellow" }}
                 type="button"
                 variant="contained"
                 fullWidth
-                onClick={closePopup}
+                onClick={handleSubmit}
               >
                 Add Package
               </Button>
-              <br />
-              <br />
             </form>
           </div>
         </DialogContent>

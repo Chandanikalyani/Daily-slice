@@ -15,7 +15,7 @@ const AdminAddItemPopup = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState(null);
 
   const openPopup = () => {
     setOpen(true);
@@ -26,19 +26,46 @@ const AdminAddItemPopup = () => {
   };
 
   const handleChange = (event) => {
-    const selectedFiles = Array.from(event.target.files);
-    const validFileTypes = ["image/jpeg", "image/png", "image/jpg"];
-    const validFiles = selectedFiles.filter(file =>
-      validFileTypes.includes(file.type)
-    );
+    setFile(event.target.files[0]);
+  };
 
-    if (validFiles.length === selectedFiles.length) {
-      const fileURLs = validFiles.map(file => URL.createObjectURL(file));
-      setFile(fileURLs);
-      setError("");
-    } else {
-      setFile([]);
-      setError("Please select files of type jpg, jpeg, or png.");
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await fetch("http://localhost:4000/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image");
+      }
+
+      const data = await response.json();
+      const imagePath = data.imagePath;
+
+      const itemData = { name, description, price, image: imagePath };
+
+      const addItemResponse = await fetch("http://localhost:4000/api/items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(itemData),
+      });
+
+      if (!addItemResponse.ok) {
+        throw new Error("Failed to add item");
+      }
+
+      const responseData = await addItemResponse.json();
+      localStorage.setItem("user", JSON.stringify(responseData));
+      alert("Item creation successful");
+      closePopup();
+    } catch (error) {
+      alert("Item creation failed");
     }
   };
 
@@ -87,16 +114,21 @@ const AdminAddItemPopup = () => {
 
               <div>
                 <label>
-                  <h4>Add Item Images</h4>
+                  <h4>Add Item Image</h4>
                 </label>
                 <br />
-                <input type="file" multiple onChange={handleChange} />
+                <input type="file" onChange={handleChange} />
                 {error && <p style={{ color: "red" }}>{error}</p>}
-                <div>
-                  {file.map((fileURL, index) => (
-                    <img key={index} src={fileURL} alt={`Selected ${index}`} style={{ maxWidth: "100%", margin: "1rem 0" }} />
-                  ))}
-                </div>
+                {file && (
+                  <div>
+                    <p>File selected: {file.name}</p>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt="Selected File"
+                      style={{ maxWidth: "100%", marginTop: "10px" }}
+                    />
+                  </div>
+                )}
               </div>
 
               <br />
@@ -106,7 +138,7 @@ const AdminAddItemPopup = () => {
                 type="button"
                 variant="contained"
                 fullWidth
-                onClick={closePopup}
+                onClick={handleSubmit}
               >
                 Add Item
               </Button>

@@ -10,7 +10,7 @@ const itemSchema = new Schema({
     required: true,
   },
   image: {
-    type: [String], // Array of image URLs
+    type: String, // Array of image URLs
   },
   description: { // Fixed typo here
     type: String,
