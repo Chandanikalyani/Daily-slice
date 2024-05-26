@@ -15,39 +15,50 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const AdminAddPlacePopup = () => {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const [placeNo, setPlaceNo] = useState("");
   const [description, setDescription] = useState("");
-  const [placeType, setPlaceType] = useState("");
-  const [numTables, setNumTables] = useState("");
-  const [numChairs, setNumChairs] = useState("");
+  const [type, setType] = useState("");
+  const [numberOfTables, setNumberOfTables] = useState("");
+  const [numberOfChairs, setNumberOfChairs] = useState("");
   const [error, setError] = useState("");
-  const [files, setFiles] = useState([]);
+  const [images, setImages] = useState([]);
 
-  const openPopup = () => {
-    setOpen(true);
-  };
-
+  const openPopup = () => setOpen(true);
   const closePopup = () => {
     setOpen(false);
+    clearForm();
   };
 
-  const handleChange = (event) => {
-    setFiles(event.target.files);
+  const clearForm = () => {
+    setPlaceNo("");
+    setDescription("");
+    setType("");
+    setNumberOfTables("");
+    setNumberOfChairs("");
+    setImages([]);
+    setError("");
   };
+
+  const handleChange = (event) => setImages(event.target.files);
 
   const handleSubmit = async () => {
+    if (!placeNo || !description || !type || !numberOfTables || !numberOfChairs || images.length === 0) {
+      setError("All fields are required.");
+      return;
+    }
+
     try {
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append("images", files[i]);
+      for (let i = 0; i < images.length; i++) {
+        formData.append("images", images[i]);
       }
-      formData.append("title", title);
+      formData.append("place_no", placeNo);
       formData.append("description", description);
-      formData.append("placeType", placeType);
-      formData.append("numTables", numTables);
-      formData.append("numChairs", numChairs);
+      formData.append("type", type);
+      formData.append("number_of_tables", numberOfTables);
+      formData.append("number_of_chairs", numberOfChairs);
 
-      const response = await fetch("http://localhost:4000/api/upload", {
+      const response = await fetch("http://localhost:4000/api/upload/place", {
         method: "POST",
         body: formData,
       });
@@ -60,12 +71,12 @@ const AdminAddPlacePopup = () => {
       const imagePaths = data.imagePaths;
 
       const placeData = {
-        title,
+        place_no: placeNo,
         description,
-        placeType,
-        numTables,
-        numChairs,
-        imagePaths,
+        type,
+        number_of_tables: numberOfTables,
+        number_of_chairs: numberOfChairs,
+        images :imagePaths,
       };
 
       const addItemResponse = await fetch("http://localhost:4000/api/places", {
@@ -80,11 +91,10 @@ const AdminAddPlacePopup = () => {
         throw new Error("Failed to add place");
       }
 
-      const responseData = await addItemResponse.json();
       alert("Place creation successful");
       closePopup();
     } catch (error) {
-      alert("Place creation failed");
+      setError("Place creation failed. Please try again.");
     }
   };
 
@@ -94,98 +104,122 @@ const AdminAddPlacePopup = () => {
         + Add Place
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue" }}>
-          <h3>Add New Place</h3>
-          <IconButton onClick={closePopup} style={{ float: "right" }}>
-            <CloseIcon color="primary" />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px" }}>
-          <div className="container">
-            <br />
-            <form>
-              <div style={{ marginBottom: "1rem" }}>
-                <TextField
-                  label="Place No:"
-                  fullWidth
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: "1rem" }}>
-                <TextField
-                  label="Description"
-                  fullWidth
-                  multiline
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: "1rem" }}>
-                <TextField
-                  type="number"
-                  label="Number of Tables"
-                  fullWidth
-                  value={numTables}
-                  onChange={(e) => setNumTables(e.target.value)}
-                />
-              </div>
-
-              <div style={{ marginBottom: "1rem" }}>
-                <TextField
-                  type="number"
-                  label="Number of Chairs"
-                  fullWidth
-                  value={numChairs}
-                  onChange={(e) => setNumChairs(e.target.value)}
-                />
-              </div>
-
-              <div style={{ marginBottom: "1rem" }}>
-                <FormControl component="fieldset">
-                  <RadioGroup
-                    row
-                    aria-label="place-type"
-                    name="place-type"
-                    value={placeType}
-                    onChange={(e) => setPlaceType(e.target.value)}
-                  >
-                    <FormControlLabel
-                      value="indoor"
-                      control={<Radio />}
-                      label="Indoor"
-                    />
-                    <FormControlLabel
-                      value="outdoor"
-                      control={<Radio />}
-                      label="Outdoor"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-
-              <div>
-                <label>
-                  <h4>Add Place Images</h4>
-                </label>
-                <br />
-                <input type="file" name="images" multiple onChange={handleChange} />
-                {error && <p style={{ color: "red" }}>{error}</p>}
-              </div>
-              <br />
-              <Button
-                style={{ background: "yellow" }}
-                type="button"
-                variant="contained"
-                fullWidth
-                onClick={handleSubmit}
-              >
-                Add Place
-              </Button>
-              <br />
-              <br />
-            </form>
+        <DialogTitle style={{ background: "blue", color: "white" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h3>Add New Place</h3>
+            <IconButton onClick={closePopup}>
+              <CloseIcon style={{ color: "white" }} />
+            </IconButton>
           </div>
+        </DialogTitle>
+        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px", color: "white" }}>
+          <form>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextField
+                label="Place No:"
+                fullWidth
+                value={placeNo}
+                onChange={(e) => setPlaceNo(e.target.value)}
+                required
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextField
+                label="Description"
+                fullWidth
+                multiline
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextField
+                type="number"
+                label="Number of Tables"
+                fullWidth
+                value={numberOfTables}
+                onChange={(e) => setNumberOfTables(e.target.value)}
+                required
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextField
+                type="number"
+                label="Number of Chairs"
+                fullWidth
+                value={numberOfChairs}
+                onChange={(e) => setNumberOfChairs(e.target.value)}
+                required
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  row
+                  aria-label="place-type"
+                  name="place-type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <FormControlLabel
+                    value="indoor"
+                    control={<Radio style={{ color: "white" }} />}
+                    label="Indoor"
+                    style={{ color: "white" }}
+                  />
+                  <FormControlLabel
+                    value="outdoor"
+                    control={<Radio style={{ color: "white" }} />}
+                    label="Outdoor"
+                    style={{ color: "white" }}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+            <div>
+              <label>
+                <h4>Add Place Images</h4>
+              </label>
+              <br />
+              <input type="file" name="images" multiple onChange={handleChange} />
+              {images.length > 0 && (
+                <div>
+                  {Array.from(images).map((file, index) => (
+                    <div key={index}>
+                      <p>File selected: {file.name}</p>
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt={'Selected File ${index + 1}'}
+                        style={{ maxWidth: "100%", marginTop: "10px" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+            </div>
+            <br />
+            <Button
+              style={{ background: "yellow" }}
+              type="button"
+              variant="contained"
+              fullWidth
+              onClick={handleSubmit}
+            >
+              Add Place
+            </Button>
+            <br />
+            <br />
+          </form>
         </DialogContent>
       </Dialog>
     </div>

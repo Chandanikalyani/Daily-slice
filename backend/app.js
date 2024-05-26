@@ -13,6 +13,7 @@ const packageRoutes = require('./routes/PackageRoutes');
 const placeRoutes = require('./routes/PlaceRoutes'); // Import place routes
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
@@ -32,8 +33,16 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+// Ensure directories exist
+const directories = ['public/itemPictures', 'public/placeImages'];
+directories.forEach(dir => {
+  if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
+
 // Register route for users
-app.post("/api/register",async(req,res)=>{
+app.post("/api/register", async (req, res) => {
   let user = new userModel(req.body);
   let result = await user.save();
   res.send(result);
@@ -78,8 +87,8 @@ app.post('/api/feedback', async (req, res) => {
   }
 });
 
-// Multer configuration
-const storage = multer.diskStorage({
+// Multer configuration for item pictures
+const itemStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/itemPictures');
   },
@@ -87,15 +96,36 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-const upload = multer({ storage: storage });
 
-// Route to handle file upload
-app.post('/api/upload', upload.single('image'), (req, res) => {
+// Multer configuration for place images
+const placeStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/placeImages');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const uploadItem = multer({ storage: itemStorage });
+const uploadPlace = multer({ storage: placeStorage });
+
+// Route to handle file upload for item pictures
+app.post('/api/upload/item', uploadItem.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
   const imagePath = req.file.path.replace('public', '');
   res.json({ imagePath: imagePath });
+});
+
+// Route to handle file upload for place images
+app.post('/api/upload/place', uploadPlace.array('images', 10), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ message: 'No files uploaded' });
+  }
+  const imagePaths = req.files.map(file => file.path.replace('public', ''));
+  res.json({ imagePaths: imagePaths });
 });
 
 // Routes
