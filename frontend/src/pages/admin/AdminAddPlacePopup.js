@@ -18,8 +18,10 @@ const AdminAddPlacePopup = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [placeType, setPlaceType] = useState("");
+  const [numTables, setNumTables] = useState("");
+  const [numChairs, setNumChairs] = useState("");
   const [error, setError] = useState("");
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
 
   const openPopup = () => {
     setOpen(true);
@@ -30,20 +32,59 @@ const AdminAddPlacePopup = () => {
   };
 
   const handleChange = (event) => {
-    const selectedFile = event.target.files[0];
-    const fileType = selectedFile.type;
+    setFiles(event.target.files);
+  };
 
-    if (
-      fileType === "image/jpeg" ||
-      fileType === "image/png" ||
-      fileType === "image/jpg"
-    ) {
-      const fileURL = URL.createObjectURL(selectedFile);
-      setFile(fileURL);
-      setError("");
-    } else {
-      setFile(null);
-      setError("Please select a file of type jpg, jpeg, or png.");
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("placeType", placeType);
+      formData.append("numTables", numTables);
+      formData.append("numChairs", numChairs);
+
+      const response = await fetch("http://localhost:4000/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload images");
+      }
+
+      const data = await response.json();
+      const imagePaths = data.imagePaths;
+
+      const placeData = {
+        title,
+        description,
+        placeType,
+        numTables,
+        numChairs,
+        imagePaths,
+      };
+
+      const addItemResponse = await fetch("http://localhost:4000/api/places", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(placeData),
+      });
+
+      if (!addItemResponse.ok) {
+        throw new Error("Failed to add place");
+      }
+
+      const responseData = await addItemResponse.json();
+      alert("Place creation successful");
+      closePopup();
+    } catch (error) {
+      alert("Place creation failed");
     }
   };
 
@@ -53,7 +94,7 @@ const AdminAddPlacePopup = () => {
         + Add Place
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{background:"blue"}}>
+        <DialogTitle style={{ background: "blue" }}>
           <h3>Add New Place</h3>
           <IconButton onClick={closePopup} style={{ float: "right" }}>
             <CloseIcon color="primary" />
@@ -81,11 +122,23 @@ const AdminAddPlacePopup = () => {
                 />
               </div>
               <div style={{ marginBottom: "1rem" }}>
-                <TextField type="number" label="Number of Tables" fullWidth />
+                <TextField
+                  type="number"
+                  label="Number of Tables"
+                  fullWidth
+                  value={numTables}
+                  onChange={(e) => setNumTables(e.target.value)}
+                />
               </div>
 
               <div style={{ marginBottom: "1rem" }}>
-                <TextField type="number" label="Number of Chairs" fullWidth />
+                <TextField
+                  type="number"
+                  label="Number of Chairs"
+                  fullWidth
+                  value={numChairs}
+                  onChange={(e) => setNumChairs(e.target.value)}
+                />
               </div>
 
               <div style={{ marginBottom: "1rem" }}>
@@ -113,41 +166,19 @@ const AdminAddPlacePopup = () => {
 
               <div>
                 <label>
-                  <h4>Add Place Image</h4>
+                  <h4>Add Place Images</h4>
                 </label>
                 <br />
-              </div>
-
-              <div>
-                <input type="file" name="Picture1" onChange={handleChange} />
+                <input type="file" name="images" multiple onChange={handleChange} />
                 {error && <p style={{ color: "red" }}>{error}</p>}
-                {file && <img src={file} alt="Selected" />}
               </div>
-
               <br />
-
-              <div>
-                <input type="file" name="Picture2" onChange={handleChange} />
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {file && <img src={file} alt="Selected" />}
-              </div>
-
-              <br />
-
-              <div>
-                <input type="file" name="Picture3" onChange={handleChange} />
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {file && <img src={file} alt="Selected" />}
-              </div>
-
-              <br />
-
               <Button
                 style={{ background: "yellow" }}
                 type="button"
                 variant="contained"
                 fullWidth
-                onClick={closePopup}
+                onClick={handleSubmit}
               >
                 Add Place
               </Button>
