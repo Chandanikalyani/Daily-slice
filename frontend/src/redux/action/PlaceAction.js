@@ -26,7 +26,7 @@ export const createPlace = (placeData) => async (dispatch) => {
 export const updatePlace = (id, updatedPlaceData) => async (dispatch) => {
   dispatch({ type: types.UPDATE_PLACE_REQUEST });
   try {
-    const response = await axios.put(/api/places/${id}, updatedPlaceData); // Adjust the endpoint accordingly
+    const response = await axios.put('/api/places/${id}', updatedPlaceData); // Adjust the endpoint accordingly
     dispatch({ type: types.UPDATE_PLACE_SUCCESS, payload: response.data });
   } catch (error) {
     dispatch({ type: types.UPDATE_PLACE_FAILURE, payload: error.response.data.message });
@@ -36,7 +36,7 @@ export const updatePlace = (id, updatedPlaceData) => async (dispatch) => {
 export const deletePlace = (id) => async (dispatch) => {
   dispatch({ type: types.DELETE_PLACE_REQUEST });
   try {
-    await axios.delete(/api/places/${id}); // Adjust the endpoint accordingly
+    await axios.delete('/api/places/${id}'); // Adjust the endpoint accordingly
     dispatch({ type: types.DELETE_PLACE_SUCCESS, payload: id });
   } catch (error) {
     dispatch({ type: types.DELETE_PLACE_FAILURE, payload: error.response.data.message });
