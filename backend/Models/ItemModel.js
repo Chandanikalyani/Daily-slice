@@ -20,6 +20,11 @@ const itemSchema = new Schema({
     type: Number,
     required: true,
   },
+  type:{
+    type:String,
+    enum: ['Pizza', 'Pasta','Drinks'],
+    required: true,
+  },
 }, { collection: 'items' });
 
 // Create the model

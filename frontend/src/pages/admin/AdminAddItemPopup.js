@@ -6,6 +6,10 @@ import {
   DialogTitle,
   IconButton,
   TextField,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -14,6 +18,7 @@ const AdminAddItemPopup = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [type, setType] = useState("Pizza"); // Default to "Pizza"
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
 
@@ -27,6 +32,7 @@ const AdminAddItemPopup = () => {
     setName("");
     setDescription("");
     setPrice("");
+    setType("Pizza");
     setFile(null);
     setError("");
   };
@@ -36,7 +42,7 @@ const AdminAddItemPopup = () => {
   };
 
   const handleSubmit = async () => {
-    if (!name || !description || !price || !file) {
+    if (!name || !description || !price || !file || !type) {
       setError("All fields are required.");
       return;
     }
@@ -57,7 +63,7 @@ const AdminAddItemPopup = () => {
       const data = await response.json();
       const imagePath = data.imagePath;
 
-      const itemData = { name, description, price, image: imagePath };
+      const itemData = { name, description, price, image: imagePath, type };
 
       const addItemResponse = await fetch("http://localhost:4000/api/items", {
         method: "POST",
@@ -123,6 +129,18 @@ const AdminAddItemPopup = () => {
                 required
               />
             </div>
+            <FormControl component="fieldset" style={{ marginBottom: "1rem" }}>
+              <label><h4>Type</h4></label>
+              <RadioGroup
+                row
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <FormControlLabel value="Pizza" control={<Radio />} label="Pizza" />
+                <FormControlLabel value="Pasta" control={<Radio />} label="Pasta" />
+                <FormControlLabel value="Drinks" control={<Radio />} label="Drinks" />
+              </RadioGroup>
+            </FormControl>
             <div>
               <label>
                 <h4>Add Item Image</h4>
