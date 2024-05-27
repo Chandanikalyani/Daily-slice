@@ -33,6 +33,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+// Serve static files from the 'public' directory
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 // Ensure directories exist
 const directories = ['public/itemPictures', 'public/placeImages'];
 directories.forEach(dir => {
@@ -115,7 +118,7 @@ app.post('/api/upload/item', uploadItem.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  const imagePath = req.file.path.replace('public', '');
+  const imagePath = '/public/${req.file.filename}'; // Adjust path here
   res.json({ imagePath: imagePath });
 });
 
@@ -124,9 +127,10 @@ app.post('/api/upload/place', uploadPlace.array('images', 10), (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ message: 'No files uploaded' });
   }
-  const imagePaths = req.files.map(file => file.path.replace('public', ''));
+  const imagePaths = req.files.map(file => '/public/${file.filename}'); // Adjust path here
   res.json({ imagePaths: imagePaths });
 });
+
 
 // Routes
 app.use('/user', authRoutes);
