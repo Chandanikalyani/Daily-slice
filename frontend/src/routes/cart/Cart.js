@@ -43,7 +43,7 @@ const Cart = () => {
               <Card style={{ width: "20rem" }}>
                 <Card.Img
                   variant="top"
-                  src={place.images.length > 0 ? `http://localhost:4000/public/${place.images[0]}` : "http://localhost:4000/public/placeImages/defaultPlace.jpg"}
+                  src={place.images.length > 0 ? `http://localhost:4000${place.images[0]}` : "http://localhost:4000/public/placeImages/defaultPlace.jpg"}
                   width={500}
                   height={300}
                 />

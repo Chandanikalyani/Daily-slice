@@ -118,16 +118,16 @@ app.post('/api/upload/item', uploadItem.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  const imagePath = `/public/${req.file.filename}`; // Adjust path here
+  const imagePath = `/public/itemPictures/${req.file.filename}`; // Adjust path here
   res.json({ imagePath: imagePath });
 });
 
 // Route to handle file upload for place images
-app.post('/api/upload/place', uploadPlace.array('images', 10), (req, res) => {
+app.post('/api/upload/place', uploadPlace.array('images', 50), (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ message: 'No files uploaded' });
   }
-  const imagePaths = req.files.map(file => `/public/${file.filename}`); // Adjust path here
+  const imagePaths = req.files.map(file => `/public/placeImages/${file.filename}`); // Adjust path here
   res.json({ imagePaths: imagePaths });
 });
 
