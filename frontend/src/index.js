@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./core-ui/app.css";
 import "./core-ui/responsive.css";
 import "./core-ui/leaflet.css";
-import './routes/menu/menu.css'
+// import './routes/menu/menu.css'
 import './routes/contact/contact.css'
 import './routes/about/about.css'
 import './routes/blog/blog.css'
