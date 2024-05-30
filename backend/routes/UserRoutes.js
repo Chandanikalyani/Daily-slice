@@ -16,5 +16,12 @@ router.get('/all', UserController.getAllUsers);
 //Create a new feedback
 router.post('/feedback',UserController.createFeedback);
 
+// Delete a user by ID
+router.delete('/:id', UserController.deleteUserById);
+
+// Update a user by ID
+router.put('/:id', UserController.updateUserById);
+
+
 
 module.exports = router;

@@ -4,14 +4,18 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
-
-  USER_SIGNIN_FAIL ,
+  USER_SIGNIN_FAIL,
   USER_SIGNIN_SUCCESS,
   USER_SIGNIN_REQUEST,
-
   FEEDBACK_CREATE_REQUEST,
   FEEDBACK_CREATE_SUCCESS,
-  FEEDBACK_CREATE_FAIL
+  FEEDBACK_CREATE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL
   
 } from "../constants/UserConstants";
 
@@ -74,3 +78,41 @@ export const createFeedback = (feedbackData) => async (dispatch) => {
     toast.error("Failed to submit feedback!");
   }
 }
+
+// Action to delete a user by ID
+export const deleteUserById = (id) => async (dispatch) => {
+  dispatch({ type: USER_DELETE_REQUEST });
+  try {
+    await axios.delete(`/user/${id}`);
+    dispatch({
+      type: USER_DELETE_SUCCESS,
+      payload: id
+    });
+    toast.success("User deleted successfully!");
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload: error.response.data.error
+    });
+    toast.error("Failed to delete user!");
+  }
+};
+
+// Action to update a user by ID
+export const updateUserById = (id, userData) => async (dispatch) => {
+  dispatch({ type: USER_UPDATE_REQUEST });
+  try {
+    const { data } = await axios.put(`/user/${id}`, userData);
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+      payload: data
+    });
+    toast.success("User updated successfully!");
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload: error.response.data.error
+    });
+    toast.error("Failed to update user!");
+  }
+};

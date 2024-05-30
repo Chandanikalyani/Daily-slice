@@ -11,6 +11,7 @@ const itemRoutes = require('./routes/ItemRoutes');
 const offerRoutes = require('./routes/OfferRoutes');
 const packageRoutes = require('./routes/PackageRoutes');
 const placeRoutes = require('./routes/PlaceRoutes'); // Import place routes
+const feedbackRoutes = require('./routes/FeedbackRoutes');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -139,6 +140,8 @@ app.use('/api', itemRoutes);
 app.use('/api', offerRoutes);
 app.use('/api', packageRoutes);
 app.use('/api', placeRoutes); // Use place routes
+app.use('/api',feedbackRoutes);
+
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

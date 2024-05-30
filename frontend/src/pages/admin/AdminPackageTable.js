@@ -1,15 +1,46 @@
-import React from 'react';
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 
 const PackageTable = () => {
-    // Sample data for demonstration
-    const packages = [
-        { _id: 1, packageName: 'Package A', packageItem: 'Item A', off: 10, price: 50, description: 'Description A', duration: '1 month' },
-        { _id: 2, packageName: 'Package B', packageItem: 'Item B', off: 20, price: 80, description: 'Description B', duration: '2 months' }
-    ];
+    const [packages, setPackages] = useState([]);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [selectedPackageId, setSelectedPackageId] = useState(null);
+
+    // Fetch data from the database
+    useEffect(() => {
+        fetch('http://localhost:4000/api/packages')
+            .then(response => response.json())
+            .then(data => setPackages(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    // Handle delete confirmation
+    const handleDeleteConfirm = () => {
+        // Perform delete action here
+        fetch(`http://localhost:4000/api/packages/${selectedPackageId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the deleted package from the state
+                setPackages(packages.filter(pkg => pkg._id !== selectedPackageId));
+            }
+        })
+        .catch(error => console.error('Error deleting package:', error))
+        .finally(() => {
+            setDeleteDialogOpen(false);
+            setSelectedPackageId(null);
+        });
+    };
+
+    // Open delete confirmation dialog
+    const handleDeleteClick = (packageId) => {
+        setSelectedPackageId(packageId);
+        setDeleteDialogOpen(true);
+    };
 
     return (
-        <Paper sx={{ 
+        <Paper sx={{
             margin: 'auto',
             border: '2px solid #000',
             borderRadius: '10px',
@@ -30,10 +61,10 @@ const PackageTable = () => {
                 </TableHead>
                 <TableBody>
                     {packages.map(pkg => (
-                        <TableRow 
-                            key={pkg._id} 
-                            sx={{ 
-                                backgroundColor: '#EACEB4', 
+                        <TableRow
+                            key={pkg._id}
+                            sx={{
+                                backgroundColor: '#EACEB4',
                                 borderRadius: '10px',
                                 '&:hover': {
                                     backgroundColor: '#f8d887', // Change to desired hover color
@@ -46,12 +77,28 @@ const PackageTable = () => {
                             <TableCell>{pkg.description}</TableCell>
                             <TableCell>{pkg.duration}</TableCell>
                             <TableCell>
-                                <button>Delete</button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => handleDeleteClick(pkg._id)}
+                                >
+                                    Delete
+                                </Button>
                             </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
+            <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                    Are you sure you want to delete this package?
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+                    <Button onClick={handleDeleteConfirm} autoFocus color='error'>Confirm</Button>
+                </DialogActions>
+            </Dialog>
         </Paper>
     );
 };

@@ -39,6 +39,9 @@ import AdminAddItemPopup from "./pages/admin/AdminAddItemPopup.js";
 import AdminPackageTable from "./pages/admin/AdminPackageTable.js";
 import AdminOfferTable from "./pages/admin/AdminOfferTable.js";
 import AdminItemTable from "./pages/admin/AdminItmTable.js";
+import AdminFeedbackTable from './pages/admin/AdminFeedbackTable.js';
+import AdminPlaceTable from './pages/admin/AdminPlaceTable.js';
+import AdminUserManage from "./pages/admin/managers/AdminUserManage.js";
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -540,8 +543,11 @@ function App() {
         <Route path="/admin/adminpackagetable" element={<AdminPackageTable/>} />
         <Route path="/admin/adminoffertable" element={<AdminOfferTable/>} />
         <Route path="/admin/adminitemtable" element={<AdminItemTable/>} />
-        
+        <Route path="/admin/adminfeedbacktable" element={<AdminFeedbackTable/>} />
+        <Route path="/admin/adminplacetable" element={<AdminPlaceTable/>} />
+        <Route path="/admin/adminusermanage" element={<AdminUserManage/>} />
 
+        
 
       </Routes>
 

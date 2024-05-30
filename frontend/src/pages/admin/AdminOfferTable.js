@@ -1,12 +1,46 @@
-import React from 'react';
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText } from '@mui/material';
+import axios from 'axios';
 
 const OfferTable = () => {
-    // Sample data for demonstration
-    const offers = [
-        { _id: 1, item: 'Item A', description: 'Description A', duration: '1 month' },
-        { _id: 2, item: 'Item B', description: 'Description B', duration: '2 months' }
-    ];
+    const [offers, setOffers] = useState([]);
+    const [deleteOfferId, setDeleteOfferId] = useState(null);
+    const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
+
+    // Fetch offers from the API
+    useEffect(() => {
+        const fetchOffers = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/offers');
+                setOffers(response.data);
+            } catch (error) {
+                console.error('Error fetching offers:', error);
+            }
+        };
+        fetchOffers();
+    }, []);
+
+    // Function to handle opening confirmation dialog
+    const handleOpenConfirmationDialog = (offerId) => {
+        setDeleteOfferId(offerId);
+        setOpenConfirmationDialog(true);
+    };
+
+    // Function to handle closing confirmation dialog
+    const handleCloseConfirmationDialog = () => {
+        setOpenConfirmationDialog(false);
+    };
+
+    // Function to delete an offer
+    const handleDeleteOffer = async () => {
+        try {
+            await axios.delete(`http://localhost:4000/api/offers/${deleteOfferId}`);
+            setOffers(offers.filter(offer => offer._id !== deleteOfferId));
+            setOpenConfirmationDialog(false);
+        } catch (error) {
+            console.error('Error deleting offer:', error);
+        }
+    };
 
     return (
         <Paper sx={{ 
@@ -22,7 +56,7 @@ const OfferTable = () => {
                         <TableCell>Item</TableCell>
                         <TableCell>Description</TableCell>
                         <TableCell>Duration</TableCell>
-                        <TableCell>Action</TableCell> {/* New column */}
+                        <TableCell>Action</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -33,19 +67,38 @@ const OfferTable = () => {
                                 backgroundColor: '#EACEB4', 
                                 borderRadius: '10px',
                                 '&:hover': {
-                                    backgroundColor: '#f8d887', // Change to desired hover color
+                                    backgroundColor: '#f8d887', 
                                 }
                             }}>
                             <TableCell>{offer.item}</TableCell>
                             <TableCell>{offer.description}</TableCell>
                             <TableCell>{offer.duration}</TableCell>
                             <TableCell>
-                                <button>Delete</button>
+                                <Button variant="contained" color="error" onClick={() => handleOpenConfirmationDialog(offer._id)}>Delete</Button>
                             </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
+
+            {/* Confirmation Dialog */}
+            <Dialog
+                open={openConfirmationDialog}
+                onClose={handleCloseConfirmationDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Delete Offer"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to delete this offer?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseConfirmationDialog}>Cancel</Button>
+                    <Button onClick={handleDeleteOffer} autoFocus color='error'>Delete</Button>
+                </DialogActions>
+            </Dialog>
         </Paper>
     );
 };

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
 const UserTable = () => {
     const [users, setUsers] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:4000/api/users')
@@ -14,6 +16,27 @@ const UserTable = () => {
                 console.error('Error fetching users:', error);
             });
     }, []);
+
+    const handleClickOpen = (userId) => {
+        setSelectedUserId(userId);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = () => {
+        axios.delete(`http://localhost:4000/user/${selectedUserId}`)
+            .then(() => {
+                setUsers(users.filter(user => user._id !== selectedUserId));
+                handleClose();
+            })
+            .catch(error => {
+                console.error('Error deleting user:', error);
+                handleClose();
+            });
+    };
 
     return (
         <Paper sx={{ 
@@ -50,12 +73,47 @@ const UserTable = () => {
                             <TableCell>{user.email}</TableCell>
                             <TableCell>{user.address}</TableCell>
                             <TableCell>{user.number}</TableCell>
-                            <TableCell>{user.action}</TableCell> {/* Data for additional column */}
-                       <TableCell><button>delete</button></TableCell>
+                            <TableCell>
+                                <Button 
+                                    variant="contained" 
+                                    color="secondary" 
+                                    onClick={() => handleClickOpen(user._id)}
+                                    sx={{
+                                        borderRadius: '5px',
+                                        backgroundColor: '#d32f2f',
+                                        color: '#fff',
+                                        '&:hover': {
+                                            backgroundColor: '#b71c1c'
+                                        }
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle>{"Confirm Delete"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this user?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={handleDelete} color="error" autoFocus>
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Paper>
     );
 };

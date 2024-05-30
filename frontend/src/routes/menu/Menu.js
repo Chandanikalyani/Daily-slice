@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 
 const items = {
   pizza: [
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: '$1.00', imageUrl: 'path/to/pizza-image.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
+    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
     // Add more pizza items here
   ],
   pasta: [
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: '$11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
+    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
     // Add more pasta items here
   ],
   drinks: [
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: '$7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
+    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
     // Add more drinks items here
   ]
 };
@@ -42,7 +42,7 @@ const MenuCard = ({ item }) => (
       
       <span style={styles.newPrice}>{item.newPrice}</span>
     </div>
-    <button style={styles.button}>Add to cart</button>
+    <button style={styles.button}>See more</button>
   </div>
 );
 
