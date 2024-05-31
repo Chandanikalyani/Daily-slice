@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import ItemAdd from "./AdminAddItemPopup";
+import { ImExit } from "react-icons/im";
+
 
 const ItemTable = () => {
     const [items, setItems] = useState([]);
@@ -42,7 +45,22 @@ const ItemTable = () => {
     };
 
     return (
+        <>
+        <br/><br/>
+          <div>
+            <a href='/admin/dashboard'>
+            <button style={{height:"50px",width:"130px",fontSize:"18px",borderRadius:"10px",marginLeft:"85%"}}>&nbsp;<ImExit /> &nbsp;Exit&nbsp;</button>
+            </a>
+        </div>
+        <br/>
         <div>
+            <ItemAdd/>
+        </div>
+        <br/>
+        <div>
+            <div>
+            <h3 style={{color:"whitesmoke",textAlign:"center"}}>Item Managment table</h3><br/>
+        </div>
             <Paper sx={{ 
                 margin: 'auto',
                 border: '2px solid #000',
@@ -50,7 +68,7 @@ const ItemTable = () => {
                 backgroundColor: '#BB5A5A',
                 width: 'fit-content',
             }}>
-                <Table>
+                <Table style={{width:"1300px"}}>
                     <TableHead>
                         <TableRow sx={{ fontWeight: 'bold' }}>
                             <TableCell>Name</TableCell>
@@ -106,6 +124,7 @@ const ItemTable = () => {
                 </DialogActions>
             </Dialog>
         </div>
+        </>
     );
 };
 

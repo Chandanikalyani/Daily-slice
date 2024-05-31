@@ -34,7 +34,7 @@ export default class BlogPreview extends React.Component {
                 alt={post.name}
               />
               <p className="date">June 27, 2023</p>
-              <Link onClick={ResetLocation} to={`/blog/${post.name.toLowerCase().replaceAll(' ', '-')}`}>
+              <Link style={{textDecoration:"none"}} onClick={ResetLocation} to={`/blog/${post.name.toLowerCase().replaceAll(' ', '-')}`}>
                 <h3 className="pop-font txt-white">{post.name}</h3>
               </Link>
               <p className="intro">{post.intro}</p>
@@ -46,6 +46,7 @@ export default class BlogPreview extends React.Component {
           onClick={ResetLocation}
           to="/blog"
           className="active-button-style txt-white"
+          style={{textDecoration:"none"}}
         >
           More posts
         </Link>

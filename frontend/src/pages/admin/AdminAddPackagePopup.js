@@ -22,7 +22,6 @@ const AdminAddPackagePopup = () => {
   const [describe, setDescription] = useState("");
   const [duration, setDuration] = useState("");
 
-  const items = ["Item 1", "Item 2", "Item 3"]; // Example items, replace with your own items
 
   const openPopup = () => {
     setOpen(true);
@@ -78,14 +77,14 @@ const AdminAddPackagePopup = () => {
                   onChange={(e) => setPackageName(e.target.value)}
                 />
               </div>
-              <div style={{ marginBottom: "1rem" }}>
+              {/* <div style={{ marginBottom: "1rem" }}>
                 <TextField
                   label="Package Item"
                   fullWidth
                   value={packageItem}
                   onChange={(e) => setPackageItem(e.target.value)}
                 />
-              </div>
+              </div> */}
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
                   label="Off (%)"
@@ -114,7 +113,7 @@ const AdminAddPackagePopup = () => {
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
                   type="date"
-                  label="Duration"
+                  label="Expird ON"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,

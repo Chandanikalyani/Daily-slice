@@ -29,6 +29,7 @@ const Header = ({
           }}
           to="/"
           className="logo-styling flex-container flex-row txt-center txt-white"
+          style={{textDecoration:"none"}}
         >
           <img
             className="rounded-circle"
@@ -52,14 +53,7 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      textDecoration: "none",
-                      color: "#ff6240",
-                    }
-                  : {}
-              }
+              style={{textDecoration:"none"}}
               className="txt-white"
               to="/"
             >
@@ -72,14 +66,7 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      textDecoration: "none",
-                      color: "#ff6240",
-                    }
-                  : {}
-              }
+              style={{textDecoration:"none"}}
               className="txt-white"
               to="/menu"
             >
@@ -87,40 +74,26 @@ const Header = ({
             </NavLink>
           </li>
 
-          <li>
+          {/* <li>
             <NavLink
               onClick={() => {
                 ResetLocation();
                 hideMenu();
               }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      textDecoration: "none",
-                      color: "#ff6240",
-                    }
-                  : {}
-              }
+              style={{textDecoration:"none"}}
               className="txt-white"
               to="/blog"
             >
               Blog
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               onClick={() => {
                 ResetLocation();
                 hideMenu();
               }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      textDecoration: "none",
-                      color: "#ff6240",
-                    }
-                  : {}
-              }
+              style={{textDecoration:"none"}}
               className="txt-white"
               to="/about"
             >
@@ -133,14 +106,7 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      textDecoration: "none",
-                      color: "#ff6240",
-                    }
-                  : {}
-              }
+              style={{textDecoration:"none"}}
               className="txt-white"
               to="/contact"
             >
@@ -154,14 +120,7 @@ const Header = ({
                   ResetLocation();
                   hideMenu();
                 }}
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        textDecoration: "none",
-                        color: "#ff6240",
-                      }
-                    : {}
-                }
+                style={{textDecoration:"none"}}
                 className="txt-white"
                 to="/profile"
               >
@@ -200,6 +159,7 @@ const Header = ({
                   ResetLocation();
                   hideMenu();
                 }}
+                style={{textDecoration:"none"}}
               >
                 <p>Reservation</p>
               </NavLink>

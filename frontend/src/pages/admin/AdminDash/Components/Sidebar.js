@@ -21,9 +21,9 @@ const Sidebar = () => {
                 </li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminuserstable"><i class="far font-weight-bold"></i> <span className="ml-3"><FaUsers />&nbsp; &nbsp;Users</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="far font-weight-bold"></i> <span className="ml-3"><FaCalendarAlt />&nbsp; &nbsp;Reservation</span></a></li>
-                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i><span className="ml-3"><GiFireplace /> &nbsp; &nbsp;Places</span></a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminplacetable"><i class="fas font-weight-bold"></i><span className="ml-3"><GiFireplace /> &nbsp; &nbsp;Places</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminoffertable"><i class="fas font-weight-bold"></i><span className="ml-3"><MdDiscount />&nbsp; &nbsp;Offer</span></a></li>
-                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i> <span className="ml-3"><LuPackagePlus />&nbsp; &nbsp;Package</span></a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminpackagetable"><i class="fas font-weight-bold"></i> <span className="ml-3"><LuPackagePlus />&nbsp; &nbsp;Package</span></a></li>
                                 
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/admin/adminitemtable"><i class="far font-weight-bold"></i> <span className="ml-3"><FaSitemap />&nbsp; &nbsp;</span>Item</a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="far font-weight-bold"></i> <span className="ml-3"></span></a></li>

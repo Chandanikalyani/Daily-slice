@@ -14,6 +14,7 @@ const BlogPosts = ({ blogPost }) => {
         <p>by {blogPost.author}</p>
       </section>
       <Link
+      style={{textDecoration:"none"}}
         onClick={ResetLocation}
         to={`/blog/${blogPost.name.toLowerCase().replaceAll(' ', '-')}`}
       >

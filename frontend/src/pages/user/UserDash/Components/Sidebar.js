@@ -15,7 +15,8 @@ const Sidebar = () => {
                        <li class="nav-item mb-2 "><a class="nav-link text-secondary" href=""> <i class="fas fa-book-medical"></i> File Report </a></li>
                     </ul>
                 </li>
-                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="far font-weight-bold"></i> <span className="ml-3"><BiSolidFoodMenu />&nbsp; &nbsp; Food Menu</span></a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/menu"><i class="far font-weight-bold"></i> <span className="ml-3"><BiSolidFoodMenu />&nbsp; &nbsp; Food Menu</span></a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-secondary" href="/blog"><i class="far font-weight-bold"></i> <span className="ml-3"><BiSolidFoodMenu />&nbsp; &nbsp; Read Blogs</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i><span className="ml-3"><LuPackageSearch />&nbsp; &nbsp; Packeges</span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i><span className="ml-3"></span></a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-secondary" href="#"><i class="fas font-weight-bold"></i> <span className="ml-3"></span></a></li>

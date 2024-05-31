@@ -42,6 +42,11 @@ import AdminItemTable from "./pages/admin/AdminItmTable.js";
 import AdminFeedbackTable from './pages/admin/AdminFeedbackTable.js';
 import AdminPlaceTable from './pages/admin/AdminPlaceTable.js';
 import AdminUserManage from "./pages/admin/managers/AdminUserManage.js";
+import AdminReservationManage from "./pages/admin/managers/AdminReservationManage.js";
+import AdminPlaceManage from "./pages/admin/managers/AdminPlaceManage.js";
+import AdminPackageManage from "./pages/admin/managers/AdminPackageManage.js";
+import AdminOfferManage from "./pages/admin/managers/AdminOfferManagement.js";
+import AdminItemManage from "./pages/admin/managers/AdminItemManage.js";
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -419,7 +424,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {location.pathname !== '/user/dashboard' && location.pathname !== '/admin/dashboard'&& <Header
+      <Header
         loginModal={
           <LoginModal
             validLogin={validLogin}
@@ -438,7 +443,7 @@ function App() {
         handleLogout={handleLogout}
         validLogin={validLogin}
         productsQuantity={productsQuantity}
-      />} 
+      />
       <Routes>
         <Route path="/" element={<RootSection />} />
         <Route path ="/user/dashboard" element = {<UserDashboard/>}/>
@@ -546,6 +551,11 @@ function App() {
         <Route path="/admin/adminfeedbacktable" element={<AdminFeedbackTable/>} />
         <Route path="/admin/adminplacetable" element={<AdminPlaceTable/>} />
         <Route path="/admin/adminusermanage" element={<AdminUserManage/>} />
+        <Route path="/admin/adminreservationmanage" element={<AdminReservationManage/>} />
+        <Route path="/admin/adminplacemanage" element={<AdminPlaceManage/>} />
+        <Route path="/admin/adminpackagemanage" element={<AdminPackageManage/>} />
+        <Route path="/admin/adminoffermanage" element={<AdminOfferManage/>} />
+        <Route path="/admin/adminitemmanage" element={<AdminItemManage/>} />
 
         
 

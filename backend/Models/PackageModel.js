@@ -9,7 +9,7 @@ const packageSchema = new Schema({
   },
   packageItem: {
     type: String,
-    required: true,
+   
   },
   off: {
     type: String,

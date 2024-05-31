@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import PackageAdd from "./AdminAddPackagePopup";
+import { ImExit } from "react-icons/im";
+
 
 const PackageTable = () => {
     const [packages, setPackages] = useState([]);
@@ -40,6 +43,21 @@ const PackageTable = () => {
     };
 
     return (
+        <>
+        <br/><br/>
+        <div>
+            <a href='/admin/dashboard'>
+            <button style={{height:"50px",width:"130px",fontSize:"18px",borderRadius:"10px",marginLeft:"85%"}}>&nbsp;<ImExit /> &nbsp;Exit&nbsp;</button>
+            </a>
+        </div>
+        <br/>
+        <div>
+            <PackageAdd/>
+        </div>
+        <br></br>
+        <div>
+            <h3 style={{color:"whitesmoke",textAlign:"center"}}>Package Managment Table</h3><br/>
+        </div>
         <Paper sx={{
             margin: 'auto',
             border: '2px solid #000',
@@ -47,7 +65,7 @@ const PackageTable = () => {
             backgroundColor: '#BB5A5A',
             width: 'fit-content',
         }}>
-            <Table>
+            <Table style={{width:"1300px"}}>
                 <TableHead>
                     <TableRow sx={{ fontWeight: 'bold' }}>
                         <TableCell>Package Name</TableCell>
@@ -100,6 +118,7 @@ const PackageTable = () => {
                 </DialogActions>
             </Dialog>
         </Paper>
+        </>
     );
 };
 

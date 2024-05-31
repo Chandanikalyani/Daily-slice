@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import PlaceAdd from '../admin/AdminAddPlacePopup';
+import { ImExit } from "react-icons/im";
+
 
 const PlaceTable = () => {
     const [places, setPlaces] = useState([]);
@@ -46,6 +49,21 @@ const PlaceTable = () => {
     };
 
     return (
+        <>
+        <br/><br/>
+         <div>
+            <a href='/admin/dashboard'>
+            <button style={{height:"50px",width:"130px",fontSize:"18px",borderRadius:"10px",marginLeft:"85%"}}>&nbsp;<ImExit /> &nbsp;Exit&nbsp;</button>
+            </a>
+        </div>
+        <br/>
+        <div>
+            <PlaceAdd/>
+        </div>
+        <br/>
+        <div>
+            <h3 style={{color:"whitesmoke",textAlign:"center"}}>Place Managment Table</h3><br/>
+        </div>
         <Paper sx={{
             margin: 'auto',
             border: '2px solid #000',
@@ -53,7 +71,7 @@ const PlaceTable = () => {
             backgroundColor: '#BB5A5A',
             width: 'fit-content',
         }}>
-            <Table>
+            <Table style={{width:"1300px"}}>
                 <TableHead>
                     <TableRow sx={{ fontWeight: 'bold' }}>
                         <TableCell>Place No</TableCell>
@@ -98,6 +116,7 @@ const PlaceTable = () => {
                 </DialogActions>
             </Dialog>
         </Paper>
+        </>
     );
 };
 
