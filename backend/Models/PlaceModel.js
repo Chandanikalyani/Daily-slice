@@ -28,6 +28,12 @@ const placeSchema = new Schema({
     type: [String],
 
   },
+  availability: {
+    type: String,
+    enum: ['Available', 'Not Available'],
+    required: true,
+    default :'Available',
+  },
 }, { collection: 'places' });
 
 // Create the model

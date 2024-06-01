@@ -15,6 +15,7 @@ const feedbackRoutes = require('./routes/FeedbackRoutes');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const reservationRoutes = require('./routes/ReservationRoutes');
 
 const app = express();
 
@@ -141,6 +142,7 @@ app.use('/api', offerRoutes);
 app.use('/api', packageRoutes);
 app.use('/api', placeRoutes); // Use place routes
 app.use('/api',feedbackRoutes);
+app.use('/api',reservationRoutes);
 
 
 // Error Handling Middleware

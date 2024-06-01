@@ -9,7 +9,7 @@ const Sidebar = () => {
                 <li class="nav-item mb-2 mt-3"><a class="nav-link text-secondary" href="#"><h5>User</h5></a></li>
                 <li class="nav-item mb-2 "><a class="nav-link text-secondary" href="#"><i class="fas fa-user font-weight-bold"></i> <span className="ml-3">Dashboard</span></a></li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link text-secondary" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="far font-weight-bold"></i> <span className="ml-3"><FaCalendarAlt />&nbsp;My Reservation</span></a>
+                    <a class="nav-link text-secondary" href="/cart" data-toggle="collapse" data-target="#submenu1"><i class="far font-weight-bold"></i> <span className="ml-3"><FaCalendarAlt />&nbsp;My Reservation</span></a>
                     <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
                        <li class="nav-item mb-2 "><a class="nav-link text-secondary" href=""><i class="fas fa-book-reader"></i> Data Report </a></li>
                        <li class="nav-item mb-2 "><a class="nav-link text-secondary" href=""> <i class="fas fa-book-medical"></i> File Report </a></li>

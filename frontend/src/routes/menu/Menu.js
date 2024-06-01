@@ -1,53 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const items = {
-  pizza: [
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    { name: 'Cheese Pizza Medium', description: 'Pizza dough, pizza sauce, provolone cheese, mozzarella.', oldPrice: '$2.00', newPrice: 'Rs.1.00', imageUrl: 'http://localhost:4000/public/placeImages/defaultPlace.jpg' },
-    // Add more pizza items here
-  ],
-  pasta: [
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    { name: 'Lamb Ragù', description: 'Lamb shoulder, gnocchi, red wine, heavy cream, tomato paste.', oldPrice: '$12.00', newPrice: 'Rs.11.00', imageUrl: 'path/to/pasta-image.jpg' },
-    // Add more pasta items here
-  ],
-  drinks: [
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    { name: 'Margarita', description: 'Tequila, lime juice, triple sec, salt.', oldPrice: '$8.00', newPrice: 'Rs.7.00', imageUrl: 'path/to/drink-image.jpg' },
-    // Add more drinks items here
-  ]
-};
 
 const MenuCard = ({ item }) => (
   <div style={styles.card}>
-    <img src={item.imageUrl} alt={item.name} style={styles.image} />
+    <img src={`http://localhost:4000${item.image}`} alt={item.name} style={styles.image} />
     <h2 style={styles.title}>{item.name}</h2>
-    <p style={styles.description}>{item.description}</p>
+    <p style={styles.description}>
+      {item.description.length > 5 ? `${item.description.substring(0, 20)}...` : item.description}
+    </p>
     <div style={styles.price}>
-      
-      <span style={styles.newPrice}>{item.newPrice}</span>
+      <span style={styles.newPrice}>Rs.{item.price}.00</span>
     </div>
     <button style={styles.button}>See more</button>
   </div>
 );
 
+
 const App = () => {
+  const [items, setItems] = useState({ pizza: [], pasta: [], drinks: [] });
   const [activeSection, setActiveSection] = useState('pizza');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/items');
+        const fetchedItems = response.data;
+
+        const categorizedItems = {
+          pizza: fetchedItems.filter(item => item.type === 'Pizza'),
+          pasta: fetchedItems.filter(item => item.type === 'Pasta'),
+          drinks: fetchedItems.filter(item => item.type === 'Drinks'),
+        };
+
+        setItems(categorizedItems);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const handleMenuClick = (section) => {
     setActiveSection(section);
@@ -80,11 +76,11 @@ const App = () => {
         </ul>
       </div>
       <div style={styles.content}>
-        {renderItems()}
+        {loading ? <p>Loading...</p> : renderItems()}
       </div>
     </div>
   );
-}
+};
 
 export default App;
 
@@ -145,11 +141,6 @@ const styles = {
     alignItems: 'center',
     margin: '10px 0',
   },
-  oldPrice: {
-    textDecoration: 'line-through',
-    color: 'red',
-    marginRight: '10px',
-  },
   newPrice: {
     color: 'green',
   },
@@ -165,6 +156,5 @@ const styles = {
     marginBottom: '20px',
     color: 'white',
     textTransform: 'capitalize',
-
   },
 };

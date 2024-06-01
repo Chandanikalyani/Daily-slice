@@ -47,6 +47,7 @@ import AdminPlaceManage from "./pages/admin/managers/AdminPlaceManage.js";
 import AdminPackageManage from "./pages/admin/managers/AdminPackageManage.js";
 import AdminOfferManage from "./pages/admin/managers/AdminOfferManagement.js";
 import AdminItemManage from "./pages/admin/managers/AdminItemManage.js";
+import PlaceDetails from "./routes/cart/SinglePlace.js"
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -557,7 +558,7 @@ function App() {
         <Route path="/admin/adminoffermanage" element={<AdminOfferManage/>} />
         <Route path="/admin/adminitemmanage" element={<AdminItemManage/>} />
 
-        
+        <Route path="/place/:id" element={<PlaceDetails />} />
 
       </Routes>
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,13 +9,14 @@ const Cart = () => {
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Reservation";
 
     const fetchPlaces = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/places'); // Adjust the endpoint accordingly
+        const response = await axios.get('http://localhost:4000/api/places');
         setPlaces(response.data);
         setLoading(false);
       } catch (error) {
@@ -50,9 +52,9 @@ const Cart = () => {
                 <Card.Body>
                   <Card.Title>{`Place ${place.place_no}`}</Card.Title>
                   <Card.Text>
-                    {place.description}
+                    {place.description.length > 100 ? `${place.description.substring(0, 100)}...` : place.description}
                   </Card.Text>
-                  <Button variant="primary">See More..</Button>
+                  <Button variant="primary" onClick={() => navigate(`/place/${place._id}`)}>See More..</Button>
                 </Card.Body>
               </Card>
             </div>
