@@ -74,14 +74,14 @@ const Chatbot = () => {
     <div>
       {!isChatOpen && (
         <div className="chat-bubble" onClick={toggleChat}>
-          <img src="./icons8-chatbot.gif" alt="Chat bubble" width={80} height={80} />
+          <img src="./images/animated-pizza-gif.gif" alt="Chat bubble" width={90} height={90} style={{borderRadius:"50px",borderColor:"black",borderStyle:"5px solid"}}/>
         </div>
       )}
       {isChatOpen && (
         <div className="chat-container" ref={chatContainerRef} >
           <div className="chat-header">
-            <img src="./icons8-chatbot.gif" alt="logo" width={40} height={40} />
-            <h2 className=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chat with QuickJobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+            <img src="./images/animated-pizza-gif.gif" alt="logo" width={40} height={40} style={{borderRadius:"20px"}}/>
+            <h2 className=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chat with Us&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
             <div className="close-btn" onClick={toggleChat}>
               <IoMdClose />
             </div>

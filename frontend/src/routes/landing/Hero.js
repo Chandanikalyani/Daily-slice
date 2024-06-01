@@ -12,26 +12,26 @@ const Hero = () => {
   return (
     <div>
 
-    <Chatbot/>
+    
    
     <section className="hero-section">
       <video autoPlay loop muted playsInline className="hero-video" >
         <source src="images/home.mp4" type="video/mp4" />
       </video>
-      <section className="header-info flex-container flex-column txt-center pop-font txt-white">
+      <section className="header-info flex-container flex-column txt-center  txt-white">
         <motion.div
           initial={{ opacity: 0, translateX: 300 }}
           whileInView={{ opacity: 1, translateX: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          <span>Welcome</span>
+          <span style={{fontFamily: "cursive",fontSize:"7rem",WebkitTextStrokeWidth:"3px",WebkitTextStrokeColor:"rgb(239, 247, 12)",color:"#bed2ab"}}>Welcome</span>
           <h1 className="txt-white">try something amazing</h1>
           <p className="txt-white">
            
           </p>
         </motion.div>
-
+        <Chatbot/>
         <div className="header-btns flex-container flex-row">
           <Link className=" passive-button-style" to="/blog" style={{textDecoration:"none"}}>
             Read Blog

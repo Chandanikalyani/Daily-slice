@@ -161,7 +161,7 @@ const Header = ({
                 }}
                 style={{textDecoration:"none"}}
               >
-                <p>Reservation</p>
+                <p>Reserve a Table</p>
               </NavLink>
             </div>
           </li>

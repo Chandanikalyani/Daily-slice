@@ -215,15 +215,6 @@ header {
   content: url("../assets//images/close-btn.svg");
 }
 
-.header-info span {
-  color: #bed2ab;
-  font-family: var(--nothing-font);
-  -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: rgb(239, 247, 12);
-  font-size: 7rem;
-
-}
-
 .header-info h1 {
   text-transform: uppercase;
   font-size: 3.5rem;

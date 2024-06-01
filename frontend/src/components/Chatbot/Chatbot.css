@@ -4,9 +4,9 @@
   right: 20px;
   width: 400px;
   max-height: 400px;
-  border: 1px solid #ccc;
+  border: 1px solid #fd7e14;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(251, 255, 0);
   display: flex;
   flex-direction: column;
 }
@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
-  background-color: #f1f1f1;
+  border-bottom: 1px solid #fd7e14;
+  background-color: #fd7e14;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -25,6 +25,7 @@
   flex-grow: 1;
   overflow-y: auto;
   padding: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .chat-input {
@@ -41,9 +42,9 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+  color: rgb(255, 255, 255);
   border-radius: 10px;
 }
 
@@ -62,13 +63,13 @@
 }
 
 .message-left {
-  background-color: #f1f1f1;
+  background-color:#fd7e14;
   align-self: flex-start;
 }
 
 .message-right {
-  background-color: #007bff;
-  color: white;
+  background-color:#fa0092;
+  color:white;
   align-self: flex-end;
 }
 
@@ -92,5 +93,5 @@
 }
 
 .option-button:hover {
-  background-color: #e1e1e1;
+  background-color: #fd7e14;
 }
