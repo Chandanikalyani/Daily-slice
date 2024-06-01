@@ -20,6 +20,11 @@ const reservationSchema = new Schema({
     required: true,
     ref: 'Place'
   },
+  status:{
+    type:String,
+    required:true,
+    default:"pending"
+  },
   date: {
     type: Date,
     required: true
