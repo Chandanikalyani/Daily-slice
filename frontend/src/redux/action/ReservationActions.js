@@ -74,15 +74,7 @@ export const getReservations = () => async (dispatch) => {
   }
 };
 
-export const updateReservation = (
-  id,
-  email,
-  contactNumber,
-  place,
-  date,
-  time,
-  duration
-) => async (dispatch) => {
+export const updateReservation = (id, status) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_RESERVATION_REQUEST });
 
@@ -94,7 +86,7 @@ export const updateReservation = (
 
     const { data } = await axios.put(
       `/api/reservations/${id}`,
-      { email, contactNumber, place, date, time, duration },
+      { status },
       config
     );
 

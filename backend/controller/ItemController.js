@@ -1,4 +1,4 @@
-const Item = require('../models/itemModel');
+const Item = require('../Models/ItemModel');
 
 // Create a new item
 exports.createItem = async (req, res) => {

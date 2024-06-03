@@ -3,12 +3,16 @@ import "./loginModal.css";
 import LinkButton from "../Button";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useUser } from '../../UserContext';
 
 const LoginModal = ({ setLoginModalWindow, loginModalWindow, hideMenu }) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(null);
+  const { setUserEmail } = useUser(); // Get setUserEmail from context
+  const navigate = useNavigate();
 
   const hideLoginModal = () => {
     setLoginModalWindow(false);
@@ -21,13 +25,15 @@ const LoginModal = ({ setLoginModalWindow, loginModalWindow, hideMenu }) => {
       setLoading(false);
       const user = response.data;
 
+      // Store user email in context and local storage
+      setUserEmail(user.email);
+      localStorage.setItem('userEmail', user.email);
+
       // Check if user has admin role
       if (user.role === 1) {
-        localStorage.setItem('userInfo', JSON.stringify(user));
-        window.location.href = '/admin/dashboard';
+        navigate('/admin/dashboard');
       } else {
-        localStorage.setItem('userInfo', JSON.stringify(user));
-        window.location.href = '/user/dashboard';
+        navigate('/user/dashboard');
       }
       
       hideLoginModal();
@@ -44,9 +50,7 @@ const LoginModal = ({ setLoginModalWindow, loginModalWindow, hideMenu }) => {
         <button
           className="close-modal-btn"
           type="button"
-          onClick={() => {
-            hideLoginModal();
-          }}
+          onClick={hideLoginModal}
         >
           X
         </button>

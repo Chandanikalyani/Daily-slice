@@ -1,10 +1,8 @@
 import React from "react";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import openMenu from "../../assets/images/open-menu.svg";
 import closeMenu from "../../assets/images/close-menu.svg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import SuccessMsg from "../../components/SuccessMsg";
 import ResetLocation from "../../helpers/ResetLocation";
 
@@ -18,6 +16,8 @@ const Header = ({
   validLogin,
   activateLoginModal,
 }) => {
+  const location = useLocation();
+
   return (
     <header>
       {loginModal}
@@ -29,7 +29,7 @@ const Header = ({
           }}
           to="/"
           className="logo-styling flex-container flex-row txt-center txt-white"
-          style={{textDecoration:"none"}}
+          style={{ textDecoration: "none" }}
         >
           <img
             className="rounded-circle"
@@ -53,7 +53,7 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={{textDecoration:"none"}}
+              style={{ textDecoration: "none" }}
               className="txt-white"
               to="/"
             >
@@ -66,34 +66,20 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={{textDecoration:"none"}}
+              style={{ textDecoration: "none" }}
               className="txt-white"
               to="/menu"
             >
               Menu
             </NavLink>
           </li>
-
-          {/* <li>
-            <NavLink
-              onClick={() => {
-                ResetLocation();
-                hideMenu();
-              }}
-              style={{textDecoration:"none"}}
-              className="txt-white"
-              to="/blog"
-            >
-              Blog
-            </NavLink>
-          </li> */}
           <li>
             <NavLink
               onClick={() => {
                 ResetLocation();
                 hideMenu();
               }}
-              style={{textDecoration:"none"}}
+              style={{ textDecoration: "none" }}
               className="txt-white"
               to="/about"
             >
@@ -106,42 +92,29 @@ const Header = ({
                 ResetLocation();
                 hideMenu();
               }}
-              style={{textDecoration:"none"}}
+              style={{ textDecoration: "none" }}
               className="txt-white"
               to="/contact"
             >
               Feedback
             </NavLink>
           </li>
-          {validLogin ? (
-            <li>
-              <NavLink
-                onClick={() => {
-                  ResetLocation();
-                  hideMenu();
-                }}
-                style={{textDecoration:"none"}}
-                className="txt-white"
-                to="/profile"
-              >
-                Profile
-              </NavLink>
-            </li>
-          ) : null}
+          <li>
+            <NavLink
+              onClick={() => {
+                ResetLocation();
+                hideMenu();
+              }}
+              style={{ textDecoration: "none" }}
+              className="txt-white"
+              to="/packages"
+            >
+              Packages
+            </NavLink>
+          </li>
           <li>
             <div className="login-and-cart">
-              {validLogin ? (
-                <Link
-                  to="/"
-                  className="passive-button-style txt-white"
-                  onClick={() => {
-                    ResetLocation();
-                    handleLogout();
-                  }}
-                >
-                  Log out
-                </Link>
-              ) : (
+              {location.pathname === "/" && (
                 <div
                   className="passive-button-style txt-white"
                   onClick={() => {
@@ -159,7 +132,7 @@ const Header = ({
                   ResetLocation();
                   hideMenu();
                 }}
-                style={{textDecoration:"none"}}
+                style={{ textDecoration: "none" }}
               >
                 <p>Reserve a Table</p>
               </NavLink>
@@ -179,6 +152,5 @@ const Header = ({
     </header>
   );
 };
-// }
 
 export default Header;

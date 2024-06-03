@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const User = require('./Models/UserModel');
 const Feedback = require('./Models/FeedbackModel');
+const Reservation = require('./Models/ReservationModel'); // Import the Reservation model
 const itemRoutes = require('./routes/ItemRoutes');
 const offerRoutes = require('./routes/OfferRoutes');
 const packageRoutes = require('./routes/PackageRoutes');
@@ -92,6 +93,26 @@ app.post('/api/feedback', async (req, res) => {
   }
 });
 
+// Update only the status of a reservation
+app.put('/api/reservations/:id', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const reservation = await Reservation.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true, runValidators: true }
+    );
+
+    if (!reservation) {
+      return res.status(404).send({ message: 'Reservation not found' });
+    }
+
+    res.send(reservation);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+});
+
 // Multer configuration for item pictures
 const itemStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -133,7 +154,6 @@ app.post('/api/upload/place', uploadPlace.array('images', 50), (req, res) => {
   res.json({ imagePaths: imagePaths });
 });
 
-
 // Routes
 app.use('/user', authRoutes);
 app.use('/user', userRoutes);
@@ -141,9 +161,8 @@ app.use('/api', itemRoutes);
 app.use('/api', offerRoutes);
 app.use('/api', packageRoutes);
 app.use('/api', placeRoutes); // Use place routes
-app.use('/api',feedbackRoutes);
-app.use('/api',reservationRoutes);
-
+app.use('/api', feedbackRoutes);
+app.use('/api', reservationRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

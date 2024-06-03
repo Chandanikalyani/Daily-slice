@@ -40,6 +40,7 @@ import AdminPackageTable from "./pages/admin/AdminPackageTable.js";
 import AdminOfferTable from "./pages/admin/AdminOfferTable.js";
 import AdminItemTable from "./pages/admin/AdminItmTable.js";
 import AdminFeedbackTable from './pages/admin/AdminFeedbackTable.js';
+import AdminReservationTable from './pages/admin/AdminReservationTable.js';
 import AdminPlaceTable from './pages/admin/AdminPlaceTable.js';
 import AdminUserManage from "./pages/admin/managers/AdminUserManage.js";
 import AdminReservationManage from "./pages/admin/managers/AdminReservationManage.js";
@@ -47,7 +48,10 @@ import AdminPlaceManage from "./pages/admin/managers/AdminPlaceManage.js";
 import AdminPackageManage from "./pages/admin/managers/AdminPackageManage.js";
 import AdminOfferManage from "./pages/admin/managers/AdminOfferManagement.js";
 import AdminItemManage from "./pages/admin/managers/AdminItemManage.js";
-import PlaceDetails from "./routes/cart/SinglePlace.js"
+import PlaceDetails from "./routes/cart/SinglePlace.js";
+import UserReservationTable from './pages/user/UserReservationTable.js';
+import PackagesView from './pages/PackageViewer.js'
+import ReservedTable from './pages/admin/AdminReservationReservedTable.js'
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -551,12 +555,16 @@ function App() {
         <Route path="/admin/adminitemtable" element={<AdminItemTable/>} />
         <Route path="/admin/adminfeedbacktable" element={<AdminFeedbackTable/>} />
         <Route path="/admin/adminplacetable" element={<AdminPlaceTable/>} />
+        <Route path="/admin/adminreservationtable" element={<AdminReservationTable/>} />
+        <Route path="/user/userreservationtable" element={<UserReservationTable/>} />
         <Route path="/admin/adminusermanage" element={<AdminUserManage/>} />
         <Route path="/admin/adminreservationmanage" element={<AdminReservationManage/>} />
+        <Route path="/admin/adminreservedtablemanage" element={<ReservedTable/>} />
         <Route path="/admin/adminplacemanage" element={<AdminPlaceManage/>} />
         <Route path="/admin/adminpackagemanage" element={<AdminPackageManage/>} />
         <Route path="/admin/adminoffermanage" element={<AdminOfferManage/>} />
         <Route path="/admin/adminitemmanage" element={<AdminItemManage/>} />
+        <Route path="/packages" element={<PackagesView/>} />
 
         <Route path="/place/:id" element={<PlaceDetails />} />
 

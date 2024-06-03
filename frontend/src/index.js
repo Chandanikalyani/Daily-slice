@@ -19,6 +19,7 @@ import './routes/blog-post/blogPost.css'
 import './routes/profile/profile.css'
 import './routes/single-item/singleItem.css'
 //import './pages/user/UserDash/UserDash.css'
+import { UserProvider } from './UserContext';
 
 
 //Components
@@ -26,7 +27,10 @@ import App from "./App.js";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <UserProvider>
     <App />
+    </UserProvider>
+    
   </React.StrictMode>
 );
 

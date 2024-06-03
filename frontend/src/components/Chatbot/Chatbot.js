@@ -74,7 +74,7 @@ const Chatbot = () => {
     <div>
       {!isChatOpen && (
         <div className="chat-bubble" onClick={toggleChat}>
-          <img src="./images/animated-pizza-gif.gif" alt="Chat bubble" width={90} height={90} style={{borderRadius:"50px",borderColor:"black",borderStyle:"5px solid"}}/>
+          <img src="./images/animated-pizza-gif.gif" alt="Chat bubble" width={90} height={90} style={{borderRadius:"40px",borderColor:"black",borderStyle:"5px solid"}}/>
         </div>
       )}
       {isChatOpen && (

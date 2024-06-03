@@ -69,11 +69,10 @@ const PackageTable = () => {
                 <TableHead>
                     <TableRow sx={{ fontWeight: 'bold' }}>
                         <TableCell>Package Name</TableCell>
-                        <TableCell>Package Item</TableCell>
                         <TableCell>Off (%)</TableCell>
                         <TableCell>Price</TableCell>
                         <TableCell>Description</TableCell>
-                        <TableCell>Duration</TableCell>
+                        <TableCell>Expired ON</TableCell>
                         <TableCell>Action</TableCell> {/* New column */}
                     </TableRow>
                 </TableHead>
@@ -88,11 +87,10 @@ const PackageTable = () => {
                                     backgroundColor: '#f8d887', // Change to desired hover color
                                 }
                             }}>
-                            <TableCell>{pkg.packageName}</TableCell>
-                            <TableCell>{pkg.packageItem}</TableCell>
+                            <TableCell>{pkg.packageName}</TableCell>                          
                             <TableCell>{pkg.off}</TableCell>
                             <TableCell>{pkg.price}</TableCell>
-                            <TableCell>{pkg.description}</TableCell>
+                            <TableCell>{pkg.describe}</TableCell>
                             <TableCell>{pkg.duration}</TableCell>
                             <TableCell>
                                 <Button
