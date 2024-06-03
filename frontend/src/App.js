@@ -52,6 +52,7 @@ import PlaceDetails from "./routes/cart/SinglePlace.js";
 import UserReservationTable from './pages/user/UserReservationTable.js';
 import PackagesView from './pages/PackageViewer.js'
 import ReservedTable from './pages/admin/AdminReservationReservedTable.js'
+import OfferView from './pages/OffersViewer.js'
 
 function App() {
   const [allCategories, setAllCategories] = useState([]);
@@ -565,6 +566,7 @@ function App() {
         <Route path="/admin/adminoffermanage" element={<AdminOfferManage/>} />
         <Route path="/admin/adminitemmanage" element={<AdminItemManage/>} />
         <Route path="/packages" element={<PackagesView/>} />
+        <Route path="/offers" element={<OfferView/>} />
 
         <Route path="/place/:id" element={<PlaceDetails />} />
 

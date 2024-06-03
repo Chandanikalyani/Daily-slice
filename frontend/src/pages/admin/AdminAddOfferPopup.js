@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -18,8 +18,24 @@ const AdminAddOfferPopup = () => {
   const [item, setSelectedItem] = useState("");
   const [describe, setDescription] = useState("");
   const [duration, setDuration] = useState("");
+  const [items, setItems] = useState([]);
 
-  const items = ["Item 1", "Item 2", "Item 3"]; // Example items, replace with your own items
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/items");
+        if (!response.ok) {
+          throw new Error("Failed to fetch items");
+        }
+        const data = await response.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const openPopup = () => {
     setOpen(true);
@@ -75,9 +91,9 @@ const AdminAddOfferPopup = () => {
                     value={item}
                     onChange={(e) => setSelectedItem(e.target.value)}
                   >
-                    {items.map((item, index) => (
-                      <MenuItem key={index} value={item}>
-                        {item}
+                    {items.map((item) => (
+                      <MenuItem key={item.id} value={item.name}>
+                        {item.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -85,9 +101,11 @@ const AdminAddOfferPopup = () => {
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
-                  label="Description"
+                  type="number"
+                  placeholder="New Price"
+                  label="Price"
                   fullWidth
-                  multiline
+                  InputProps={{ inputProps: { min: 0 } }}
                   value={describe}
                   onChange={(e) => setDescription(e.target.value)}
                 />

@@ -95,7 +95,8 @@ const AdminAddPackagePopup = () => {
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
-                  label="Price"
+                type="number"
+                label="Price"
                   fullWidth
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}

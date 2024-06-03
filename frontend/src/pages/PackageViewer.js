@@ -21,7 +21,7 @@ function App() {
             <div key={index} style={{ backgroundColor: '#fff', borderRadius: '50px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', overflow: 'hidden', marginBottom: '20px', position: 'relative',borderColor:"yellow",borderStyle:"5px solid" }}>
               <div style={{ fontSize: '80px', color: 'red', position: 'absolute', top: '20px', right: '20px', marginTop: '10px', marginRight: '50px' }}>{pack.off}</div>
               <div style={{ fontSize: '36px', color: 'red', position: 'absolute', top: '20px', right: '20px', marginRight: '75%' }}>
-                <img src='/images/offer-gif-4.gif' width={170} height={150}/>
+                <img src='/images/package.webp' width={170} height={150}/>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '20px' }}>
                 <div style={{ fontSize: '30px', color: 'black', marginBottom: '10px',fontWeight:"bold" }}>{pack.packageName}</div>
