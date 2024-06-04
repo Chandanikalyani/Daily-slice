@@ -225,7 +225,7 @@ const PlaceDetails = () => {
             {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
           </Form>
         )}
-        {reservationSuccess === true && <p>Reservation created successfully!</p>}
+        {reservationSuccess === true && <p>Reservation created successfully!</p>&& window.location.reload()}
         {reservationSuccess === false && <p>Failed to create reservation. Please try again.</p>}
       </div>
     </div>

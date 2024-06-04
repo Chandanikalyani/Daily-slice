@@ -95,7 +95,7 @@ const PackageTable = () => {
                             <TableCell>
                                 <Button
                                     variant="contained"
-                                    color="secondary"
+                                    color="error"
                                     onClick={() => handleDeleteClick(pkg._id)}
                                 >
                                     Delete

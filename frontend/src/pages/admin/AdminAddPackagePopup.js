@@ -6,17 +6,12 @@ import {
   DialogTitle,
   IconButton,
   TextField,
-  MenuItem,
-  FormControl,
-  Select,
-  InputLabel,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const AdminAddPackagePopup = () => {
   const [open, setOpen] = useState(false);
   const [packageName, setPackageName] = useState("");
-  const [packageItem, setPackageItem] = useState("");
   const [off, setOff] = useState("");
   const [price, setPrice] = useState("");
   const [describe, setDescription] = useState("");
@@ -38,7 +33,7 @@ const AdminAddPackagePopup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ packageName, packageItem, off, price, describe, duration }),
+        body: JSON.stringify({ packageName,  off, price, describe, duration }),
       });
 
       if (!response.ok) {
@@ -49,6 +44,7 @@ const AdminAddPackagePopup = () => {
       localStorage.setItem("user", JSON.stringify(data));
       alert("Package creation successful");
       closePopup();
+      window.location.reload();
     } catch (error) {
       alert("Package creation failed");
     }
@@ -60,14 +56,15 @@ const AdminAddPackagePopup = () => {
         + Add Package
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue", color: "white" }}>
+        <DialogTitle style={{ background: "#204969", color: "white" }}>
           <h3>Add New Package</h3>
           <IconButton onClick={closePopup} style={{ float: "right" }}>
             <CloseIcon style={{ color: "white" }} />
           </IconButton>
         </DialogTitle>
-        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px" }}>
+        <DialogContent style={{ backgroundColor: "white", paddingBottom: "16px" }}>
           <div className="container">
+            <br/>
             <form>
               <div style={{ marginBottom: "1rem" }}>
                 <TextField
@@ -124,7 +121,7 @@ const AdminAddPackagePopup = () => {
                 />
               </div>
               <Button
-                style={{ background: "yellow" }}
+                style={{ background: "#204969" }}
                 type="button"
                 variant="contained"
                 fullWidth

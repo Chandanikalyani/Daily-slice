@@ -93,6 +93,7 @@ const AdminAddPlacePopup = () => {
 
       alert("Place creation successful");
       closePopup();
+      window.location.reload();
     } catch (error) {
       setError("Place creation failed. Please try again.");
     }
@@ -104,7 +105,7 @@ const AdminAddPlacePopup = () => {
         + Add Place
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue", color: "white" }}>
+        <DialogTitle style={{ background: "#204969", color: "white" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h3>Add New Place</h3>
             <IconButton onClick={closePopup}>
@@ -112,7 +113,8 @@ const AdminAddPlacePopup = () => {
             </IconButton>
           </div>
         </DialogTitle>
-        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px", color: "white" }}>
+        <DialogContent style={{ backgroundColor: "white", paddingBottom: "16px", color: "black" }}>
+          <br/>
           <form>
             <div style={{ marginBottom: "1rem" }}>
               <TextField
@@ -121,8 +123,8 @@ const AdminAddPlacePopup = () => {
                 value={placeNo}
                 onChange={(e) => setPlaceNo(e.target.value)}
                 required
-                inputProps={{ style: { color: "white" } }}
-                InputLabelProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" } }}
               />
             </div>
             <div style={{ marginBottom: "1rem" }}>
@@ -133,8 +135,8 @@ const AdminAddPlacePopup = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
-                inputProps={{ style: { color: "white" } }}
-                InputLabelProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" } }}
               />
             </div>
             <div style={{ marginBottom: "1rem" }}>
@@ -145,8 +147,8 @@ const AdminAddPlacePopup = () => {
                 value={numberOfTables}
                 onChange={(e) => setNumberOfTables(e.target.value)}
                 required
-                inputProps={{ style: { color: "white" } }}
-                InputLabelProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" } }}
               />
             </div>
             <div style={{ marginBottom: "1rem" }}>
@@ -157,8 +159,8 @@ const AdminAddPlacePopup = () => {
                 value={numberOfChairs}
                 onChange={(e) => setNumberOfChairs(e.target.value)}
                 required
-                inputProps={{ style: { color: "white" } }}
-                InputLabelProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "black" } }}
+                InputLabelProps={{ style: { color: "black" } }}
               />
             </div>
             <div style={{ marginBottom: "1rem" }}>
@@ -172,15 +174,15 @@ const AdminAddPlacePopup = () => {
                 >
                   <FormControlLabel
                     value="indoor"
-                    control={<Radio style={{ color: "white" }} />}
+                    control={<Radio style={{ color: "black" }} />}
                     label="Indoor"
-                    style={{ color: "white" }}
+                    style={{ color: "black" }}
                   />
                   <FormControlLabel
                     value="outdoor"
-                    control={<Radio style={{ color: "white" }} />}
+                    control={<Radio style={{ color: "black" }} />}
                     label="Outdoor"
-                    style={{ color: "white" }}
+                    style={{ color: "black" }}
                   />
                 </RadioGroup>
               </FormControl>
@@ -209,7 +211,7 @@ const AdminAddPlacePopup = () => {
             </div>
             <br />
             <Button
-              style={{ background: "yellow" }}
+              style={{ background: "#204969" }}
               type="button"
               variant="contained"
               fullWidth

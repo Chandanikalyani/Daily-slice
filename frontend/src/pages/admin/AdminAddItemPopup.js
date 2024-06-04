@@ -79,6 +79,7 @@ const AdminAddItemPopup = () => {
 
       alert("Item creation successful");
       closePopup();
+      window.location.reload();
     } catch (error) {
       setError("Item creation failed. Please try again.");
     }
@@ -90,7 +91,7 @@ const AdminAddItemPopup = () => {
         + Add Item
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue", color: "white" }}>
+        <DialogTitle style={{ background: "#204969", color: "white" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h3>Add New Item</h3>
             <IconButton onClick={closePopup}>
@@ -98,7 +99,8 @@ const AdminAddItemPopup = () => {
             </IconButton>
           </div>
         </DialogTitle>
-        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px", color: "white" }}>
+        <DialogContent style={{ backgroundColor: "#FFEFEF", paddingBottom: "16px", color: "black" }}>
+          <br/>
           <form>
             <div style={{ marginBottom: "1rem" }}>
               <TextField
@@ -161,7 +163,7 @@ const AdminAddItemPopup = () => {
             {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
             <br />
             <Button
-              style={{ background: "yellow" }}
+              style={{ background: "#204969" }}
               type="button"
               variant="contained"
               fullWidth

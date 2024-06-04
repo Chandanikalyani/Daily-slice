@@ -63,6 +63,7 @@ const AdminAddOfferPopup = () => {
       localStorage.setItem("user", JSON.stringify(data));
       alert("Offer creation successful");
       closePopup();
+      window.location.reload();
     } catch (error) {
       alert("Offer creation failed");
     }
@@ -74,14 +75,15 @@ const AdminAddOfferPopup = () => {
         + Add Offer
       </Button>
       <Dialog open={open} onClose={closePopup} fullWidth maxWidth="sm">
-        <DialogTitle style={{ background: "blue", color: "white" }}>
+        <DialogTitle style={{ background: "#204969", color: "white" }}>
           <h3>Add New Offer</h3>
           <IconButton onClick={closePopup} style={{ float: "right" }}>
             <CloseIcon style={{ color: "white" }} />
           </IconButton>
         </DialogTitle>
-        <DialogContent style={{ backgroundColor: "blue", paddingBottom: "16px" }}>
+        <DialogContent style={{ backgroundColor: "white", paddingBottom: "16px" }}>
           <div className="container">
+            <br/>
             <form>
               <div style={{ marginBottom: "1rem" }}>
                 <FormControl fullWidth>
@@ -123,7 +125,7 @@ const AdminAddOfferPopup = () => {
                 />
               </div>
               <Button
-                style={{ background: "yellow" }}
+                style={{ background: "#204969" }}
                 type="button"
                 variant="contained"
                 fullWidth

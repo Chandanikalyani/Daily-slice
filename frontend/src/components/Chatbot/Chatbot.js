@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import "../Chatbot/Chatbot.css"; // Import CSS file for styling
 
 const Chatbot = () => {
-  const initialMessage = "Hi, Welcome to QuickJobs Chat, May I know your name?";
+  const initialMessage = "Hi, Welcome to Italian Pizza Chat, May I know your name?";
 
   const [messages, setMessages] = useState([{ message: initialMessage }]);
   const [text, setText] = useState("");
@@ -46,7 +46,7 @@ const Chatbot = () => {
         { message: `Hi, ${userMessage}!` },
         {
           message: 'What would you like to know?',
-          options: ['Contact', 'Email', 'Categories' ,'About us' ,"Interview tips" ,"Apply"]
+          options: ['About us','Menue','Packages','Places']
         }
       ];
     } else {
