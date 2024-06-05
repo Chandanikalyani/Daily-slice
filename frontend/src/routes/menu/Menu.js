@@ -12,7 +12,6 @@ const MenuCard = ({ item }) => (
     <div style={styles.price}>
       <span style={styles.newPrice}>Rs.{item.price}.00</span>
     </div>
-    {/* <button style={styles.button}>See more</button> */}
   </div>
 );
 

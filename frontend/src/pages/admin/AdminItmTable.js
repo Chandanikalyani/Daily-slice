@@ -73,6 +73,7 @@ const ItemTable = () => {
                         <TableRow sx={{ fontWeight: 'bold' }}>
                             <TableCell>Name</TableCell>
                             <TableCell>Description</TableCell>
+                            <TableCell>Type</TableCell>
                             <TableCell>Price</TableCell>
                             <TableCell>Action</TableCell>
                         </TableRow>
@@ -90,6 +91,7 @@ const ItemTable = () => {
                                 }}>
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.type}</TableCell>
                                 <TableCell>{item.price}</TableCell>
                                 <TableCell>
                                     <button 

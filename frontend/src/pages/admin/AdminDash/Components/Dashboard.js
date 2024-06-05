@@ -31,7 +31,7 @@ const Dashboard = () => {
                     <div className="card bg-success text-white h-100" onClick={toggleUserTable}>
                         <div className="card-body bg-success" style={{ backgroundColor: "#57b960" }}>
                             <div className="rotate">
-                                <i className="fa fa-user fa-4x"></i>
+                                <i className="fa fa-4x"></i>
                             </div>
                             <h6 className="text-uppercase">Users</h6>
                             <h1 className="display-4">{userCount}</h1>
@@ -42,10 +42,10 @@ const Dashboard = () => {
                     <div className="card text-white bg-danger h-100">
                         <div className="card-body bg-danger">
                             <div className="rotate">
-                                <i className="fa fa-list fa-4x"></i>
+                                <i className="fa fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Posts</h6>
-                            <h1 className="display-4">87</h1>
+                            <h6 className="text-uppercase">Feedback</h6>
+                            <h1 className="display-4">5</h1>
                         </div>
                     </div>
                 </div>
@@ -53,9 +53,9 @@ const Dashboard = () => {
                     <div className="card text-white bg-info h-100">
                         <div className="card-body bg-info">
                             <div className="rotate">
-                                <i className="fab fa-twitter fa-4x"></i>
+                                <i className="fa fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Tweets</h6>
+                            <h6 className="text-uppercase">Items</h6>
                             <h1 className="display-4">125</h1>
                         </div>
                     </div>
@@ -64,10 +64,10 @@ const Dashboard = () => {
                     <div className="card text-white bg-warning h-100">
                         <div className="card-body">
                             <div className="rotate">
-                                <i className="fa fa-share fa-4x"></i>
+                                <i className="fa fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Shares</h6>
-                            <h1 className="display-4">36</h1>
+                            <h6 className="text-uppercase">Places</h6>
+                            <h1 className="display-4">3</h1>
                         </div>
                     </div>
                 </div>

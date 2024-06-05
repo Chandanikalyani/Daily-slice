@@ -24,7 +24,7 @@ const Dashboard = () => {
                                 <i className="fa  fa-4x"></i>
                             </div>
                             <h6 className="text-uppercase">Users</h6>
-                            <h1 className="display-4">134</h1>
+                            <h1 className="display-4">7</h1>
                         </div>
                     </div>
                 </div>
@@ -34,8 +34,8 @@ const Dashboard = () => {
                             <div className="rotate">
                                 <i className="fa  fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Posts</h6>
-                            <h1 className="display-4">87</h1>
+                            <h6 className="text-uppercase">Feedback</h6>
+                            <h1 className="display-4">5</h1>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ const Dashboard = () => {
                             <div className="rotate">
                                 <i className="fab  fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Tweets</h6>
+                            <h6 className="text-uppercase">Items</h6>
                             <h1 className="display-4">125</h1>
                         </div>
                     </div>
@@ -56,8 +56,8 @@ const Dashboard = () => {
                             <div className="rotate">
                                 <i className="fa  fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Shares</h6>
-                            <h1 className="display-4">36</h1>
+                            <h6 className="text-uppercase">Places</h6>
+                            <h1 className="display-4">3</h1>
                         </div>
                     </div>
                 </div>
